@@ -16,7 +16,6 @@ const Login = ({ setIsAuthenticated }) => {
   const handlesubmin = async (e) => {
     e.preventDefault();
 
-    
     const res = await fetch(`${backend}/login`, {
       method: "POST",
       headers: {
@@ -25,7 +24,6 @@ const Login = ({ setIsAuthenticated }) => {
       body: JSON.stringify({
         email,
         password,
-       
       }),
     });
 
@@ -50,13 +48,13 @@ const Login = ({ setIsAuthenticated }) => {
 
       // alert(res.data.msg);
     } else {
-       console.error("Error de inicio de sesion");
+      console.error("Error de inicio de sesion");
     }
 
     // const makeAuthenticatedRequest = async (method, url, data) => {
     //   // Agrega el token de acceso a los encabezados de la solicitud
     //   const accessToken = localStorage.getItem("jwt_token");
-  
+
     //   const res = await fetch(`${backend}/protected`,{
     //     method,
     //     url,
@@ -66,9 +64,7 @@ const Login = ({ setIsAuthenticated }) => {
     //     },
 
     //   });
-      
-      
-  
+
     //   return res;
     // };
   };
@@ -117,7 +113,11 @@ const Login = ({ setIsAuthenticated }) => {
               <button className="log-in"> Log In </button>
             </div>
             <div className="other">
-              <button className="btn-submits-l ">Forgot Password?</button>
+              <Link to="/resetpassword">
+               
+                <button className="btn-submits-l ">Forgot Password?</button>
+              </Link>
+              {/* <button className="btn-submits-l ">Forgot Password?</button> */}
               <Link to="/registro">
                 <button className="btn-submits">
                   Sign Up

@@ -12,6 +12,7 @@ import Addtasks from "./components/Addtasks";
 import Mythings from "./components/Mythings";
 import About from "./components/About";
 import PrivateRoute from "./components/PrivateRoute";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const initialAuthenticatedStatus =
@@ -21,17 +22,7 @@ function App() {
     initialAuthenticatedStatus
   );
 
-  // const navegate = useNavigate();
-
-  // const handlelogout = () => {
-  //   localStorage.removeItem("isAuthenticated");
-
-  //   setIsAuthenticated(false);
-
-  //   navegate("/");
-  // };
-
-  // console.log(typeof(setIsAuthenticated))
+  
   return (
     <Fragment>
       <Router>
@@ -43,6 +34,7 @@ function App() {
               element={<Login setIsAuthenticated={setIsAuthenticated} />}
             />
             <Route path="/Registro" element={<Registro_U />} />
+            <Route path="/resetpassword" element={<ResetPassword/>}/>
             <Route path="/about" element={<About />} />
 
             <Route

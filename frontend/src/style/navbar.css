@@ -1,0 +1,113 @@
+ @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Lobster', cursive;
+}
+
+.head-navbar {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    background:#8FBF9F;
+    font-size: 20px;
+}
+.logo{
+    font-size: 20px;
+}
+.head-navbar .header-left {
+    display: flex;
+    align-items: center;
+}
+.head-navbar .header-left .logo {
+    width: 140px;
+}
+.head-navbar .header-left nav {
+    margin-left: 50px;
+}
+.head-navbar .header-left nav ul {
+    display: flex;
+}
+nav ul li a {
+    display: block;
+    color: #100f0f;
+    font-size: 20px;
+    padding: 5px 25px;
+    transition: 0.2s;
+}
+nav ul li a:hover,
+nav ul li a.active {
+    color: #100f0f;
+}
+nav .login-signup {
+    display: none;
+}
+.head-navbar .header-right {
+    display: flex;
+    align-items: center;
+}
+.head-navbar .login-signup {
+    color: #100f0f;
+    font-weight: bold;
+}
+.head-navbar .login-signup a {
+    display: inline-block;
+    color: #100f0f;
+    background: #F18F01 ;
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+.head-navbar .header-right .hamburger {
+    margin-left: 20px;
+    cursor: pointer;
+    display: none;
+}
+.head-navbar .header-right .hamburger div {
+    width: 30px;
+    height: 2px;
+    margin: 6px 0;
+    background: #100f0f;
+}
+@media only screen and (max-width: 1000px) {
+    .head-navbar {
+        padding: 0 20px;
+    }
+    .head-navbar .header-right .hamburger {
+        display: block;
+    }
+    .head-navbar .header-left nav {
+        margin: 0;
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: fit-content;
+        background-color: #0b2239;
+        padding: 30px;
+        transition: 0.3s;
+        text-align: center;
+        z-index: -1;
+    }
+    .head-navbar .header-left nav.active {
+        top: 70px;
+    }
+    .head-navbar .header-left nav ul {
+        display: block;
+    }
+}
+@media only screen and (max-width: 500px) {
+    nav .login-signup {
+        display: block;
+        margin-top: 20px;
+    }
+    .head-navbar .header-right .login-signup {
+        display: none;
+    }
+}

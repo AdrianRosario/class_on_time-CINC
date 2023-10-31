@@ -1,0 +1,96 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.tareas-T {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    padding-top: 65px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr); 
+    gap: 4em;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+
+
+.add-T{
+    width: 350px;
+    height:  330px  ;
+    border-radius: 3px;
+    box-shadow: #000000 0px 3px 8px;
+    padding: 2%;
+    background-color: #67aa7d;
+    
+    
+}
+
+.titulo{
+    padding: 10px;
+    color: #F18F01;
+    
+
+}
+.header-T{
+    margin: 1% auto 10% auto;
+    text-align: justify;
+}
+
+.header-T .span-T  {
+
+    font-family: 'Merriweather', serif;
+    background:#84d49e ;
+
+
+    display: inline-block;
+    color: #000;
+  
+    width: 150px auto;
+    height: 40px;
+  
+    background: #F5ECD7;
+    border-radius: 5px;
+  
+    
+    padding: 9px;
+    text-align: center;
+    
+    font-size: 18px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-left: 12px;
+    
+  }
+
+
+.header-T .description-T {
+    padding-top: 25px;
+    color: #000;
+    font-family: 'Merriweather', serif;
+    
+}
+
+.icons-T{
+    float:right;
+    padding-top: 48%;
+}
+
+.link{
+   margin-left: 30px;
+}
+
+.tiempo{
+   float: left;
+   padding-top: 50%;
+}
+
+.hora{
+   color: #000; 
+}
+
+

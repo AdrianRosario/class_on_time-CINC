@@ -1,0 +1,143 @@
+ @import url("https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur");
+
+ * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.form-login {
+  width: 450px;
+  min-height: 500px;
+  height: auto;
+  border-radius: 5px;
+  margin: 2% auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 2%;
+  background-color: #8FBF9F;
+}
+
+ .form-login .con {
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  margin: 0 auto;
+} 
+
+.form-head {
+  margin: 2% auto 10% auto;
+  text-align: center;
+}
+
+.form-head h2 {
+  font-size: 250%;
+  font-family: "Playfair Display", serif;
+  color: #3e403f;
+}
+
+.form-head p {
+  letter-spacing: 0.05em;
+}
+
+
+.input-item {
+  background: #fff;
+  color: #333;
+  padding: 14.5px 0px 15px 9px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+
+
+input[class="form-input"] {
+  width: 250px;
+  height: 50px;
+
+  margin-top: 2%;
+  padding: 15px;
+
+  font-size: 16px;
+  font-family: "Abel", sans-serif;
+  color: #5e6472;
+
+  outline: none;
+  border: none;
+
+  border-radius: 0px 5px 5px 0px;
+  transition: 0.2s linear;
+}
+input[id="txt-input"] {
+  width: 250px;
+}
+
+input:focus {
+  transform: translateX(-2px);
+  border-radius: 5px;
+}
+
+.log-in , .btn-submits , .btn-submits-l{
+  display: inline-block;
+  color: #000;
+
+  width: 280px;
+  height: 50px;
+
+  padding:  20px;
+  background: #F18F01;
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s linear;
+
+  margin: 7% auto;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+  
+}
+
+ .btn-submits , .btn-submits-l {
+  width: 48%;
+  display: inline-block;
+  /* float: left;  */
+  margin-left: 2%;
+  
+} 
+
+
+.btn-submits-l {
+  background: transparent;
+}
+
+
+.btn-submits {
+  background: #F18F01;
+}
+
+
+button:hover {
+  transform: translatey(3px);
+  box-shadow: none;
+}
+
+
+button:hover {
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+} 

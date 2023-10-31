@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Lobster", cursive;
+}
+
+.head-navbar {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  background: #8fbf9f;
+  font-size: 20px;
+}
+.logo {
+  font-size: 20px;
+ 
+}
+.log{
+  text-decoration: none;
+  color: #000;
+}
+.head-navbar .header-left {
+  display: flex;
+  align-items: center;
+}
+.head-navbar .header-left .logo {
+  width: 140px;
+}
+.head-navbar .header-left nav {
+  margin-left: 50px;
+}
+.head-navbar .header-left nav ul {
+  display: flex;
+}
+nav ul li a {
+  display: block;
+  color: #100f0f;
+  font-size: 20px;
+  padding: 5px 25px;
+  transition: 0.2s;
+}
+nav ul li a:hover,
+nav ul li a.active {
+  color: #100f0f;
+}
+nav .logout-signup {
+  display: none;
+}
+.head-navbar .header-logout {
+  display: flex;
+  align-items: center;
+}
+.head-navbar .logout-signup {
+  color: #100f0f;
+  font-weight: bold;
+}
+.head-navbar .logout-signup link {
+  display: inline-block;
+  color: #100f0f;
+  background: #0a0a0a;
+  padding: 5px 12px;
+  border-radius: 5px;
+}
+
+.logout-L {
+  font-size: .8em;
+  font-family: 'Oswald', sans-serif;
+	position: relative;
+  right: -50px;
+  bottom: 27px;
+  overflow: hidden;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity .45s;
+  -webkit-transition: opacity .35s;
+  
+} 
+
+
+.button-L {
+  text-decoration: none;
+	float: right;
+  margin: 15px;
+  color: #000;
+  width: 25px;
+  padding-top: 35px;
+  transition: width .35s;
+  -webkit-transition: width .35s;
+  margin-left: 10px;
+  
+}
+
+.button-L:hover {
+  width: 125px;
+}
+
+.button-L:hover .logout-L {
+  opacity: 0.9;
+}
+
+.button-L {
+  text-decoration: none;
+}
+
+.head-navbar .header-logout .hamburger {
+  margin-left: 20px;
+  cursor: pointer;
+  display: none;
+}
+.head-navbar .header-logout .hamburger div {
+  width: 30px;
+  height: 2px;
+  margin: 6px 0;
+  background: #100f0f;
+}
+@media only screen and (max-width: 1000px) {
+  .head-navbar {
+    padding: 0 20px;
+  }
+  .head-navbar .header-logout .hamburger {
+    display: block;
+  }
+  .head-navbar .header-left nav {
+    margin: 0;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    background-color: #0b2239;
+    padding: 30px;
+    transition: 0.3s;
+    text-align: center;
+    z-index: -1;
+  }
+  .head-navbar .header-left nav.active {
+    top: 70px;
+  }
+  .head-navbar .header-left nav ul {
+    display: block;
+  }
+}
+@media only screen and (max-width: 500px) {
+  nav .logot-signup {
+    display: block;
+    margin-top: 20px;
+  }
+  .head-navbar .header-logout .logout-signup {
+    display: none;
+  }
+}

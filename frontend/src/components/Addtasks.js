@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import TareasPage from "../TareasPage";
-import jwtDecode from "jwt-decode";
+
 import "../style/add_tareas.css";
 
 
@@ -70,6 +70,7 @@ const Addtasks = () => {
                 placeholder="Add Tareas"
                 onChange={(e) => setNameTasks(e.target.value)}
                 value={nameTasks}
+                autoFocus
                 required
               />
               <label form="descripcion">Descripcion* </label>
@@ -79,6 +80,7 @@ const Addtasks = () => {
                 placeholder="Add Tareas"
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
+                
                 required
               />
               <label form="Date">Date*</label>

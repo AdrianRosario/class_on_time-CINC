@@ -13,9 +13,7 @@ db = mongo.db.userb
 @app.route('/resetpassword', methods=['GET','POST'])
 def resetpassword ():
     user = db.find_one({'email': request.json['email'] })
-    # email = request.json.get('email')  # Obtener el correo electrónico del JSON enviado
-
-    # user = db.find_one({'email': email})
+   
 
     if user:
         newpassword = str(random.randint(1000000, 9999999))
@@ -29,7 +27,7 @@ def resetpassword ():
         yag.send(to=user['email'], subject='Contraseña olvidada', contents=body)
         yag.close()
 
-        return jsonify({'msg': 'hola'})
+        return jsonify({'msg': 'password changed successfully'})
     else:
-        return jsonify({'msg': 'correo no encontrado'})
+        return jsonify({'msg': 'Email not found'})
         

@@ -30,6 +30,18 @@ const Education = () => {
     getTasks();
   }, []);
 
+  const deleteUser = async (id) => {
+    const userResponse = window.confirm("Are you sure you want to delete it?");
+    if (userResponse) {
+      const res = await fetch(`${backend}/tasks/${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      console.log(data);
+      await getTasks();
+    }
+  };
+
   return (
     <Fragment>
       <TareasPage />
@@ -45,7 +57,7 @@ const Education = () => {
               <span>{task.date}</span>
             </div>
             <div className="icons-T">
-              <Link className="link">
+              <Link className="link" onClick={(e) => deleteUser(task._id) }>
                 <img src={icons} alt="" />
               </Link>
               <Link className="link">

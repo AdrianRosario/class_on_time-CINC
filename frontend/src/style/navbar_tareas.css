@@ -120,6 +120,72 @@ nav .logout-signup {
   margin: 6px 0;
   background: #100f0f;
 }
+
+
+
+.menu__links{
+  height: 100%;
+  transition: transform .5s;
+  display: flex;
+}
+
+.menu__item{
+  list-style: none;
+  position: relative;
+  height: 100%;
+  --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+  --transform: rotate(-90deg);
+}
+
+.menu__item:hover{
+  --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  --transform: rotate(0);
+}
+
+.menu__link{
+  color:#000;
+  text-decoration: none;
+  padding: 0 50px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+/* .menu__link:hover{
+  background-color: white; 
+} */
+
+
+.menu__arrow{
+  transform: var(--transform);
+  transition: transform .3s;
+  display: block;
+  margin-left: 5px;
+}
+
+.menu__nesting{
+  list-style: none;
+  transition:clip-path .3s;
+  clip-path: var(--clip);
+  position: absolute;
+  left: 0;
+  bottom: -30px; 
+
+  width: max-content;
+  transform: translateY(100%);
+  background-color: #DEDBA7;
+ 
+  
+}
+
+.menu__link--inside{
+  padding: 5px 40px 15px 20px;
+}
+
+.menu__link--inside:hover{
+  background-color:#F18F01 ;
+}
+
 @media only screen and (max-width: 1000px) {
   .head-navbar {
     padding: 0 20px;

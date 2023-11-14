@@ -13,6 +13,8 @@ import Mythings from "./components/Mythings";
 import About from "./components/About";
 import PrivateRoute from "./components/PrivateRoute";
 import ResetPassword from "./components/ResetPassword";
+import Updata from "./components/Updata";
+import PrivatePassword from "./components/PrivatePassword";
 
 function App() {
   const initialAuthenticatedStatus =
@@ -36,6 +38,8 @@ function App() {
             <Route path="/Registro" element={<Registro_U />} />
             <Route path="/resetpassword" element={<ResetPassword/>}/>
             <Route path="/about" element={<About />} />
+            <Route path="/updata" element={<Updata/>}/>
+           
 
             <Route
                exact
@@ -58,6 +62,7 @@ function App() {
             <Route path="/education" element={<PrivateRoute isAuthenticated={isAuthenticated}><Education/></PrivateRoute>} />
             <Route path="/mythings" element={<PrivateRoute isAuthenticated={isAuthenticated}><Mythings/></PrivateRoute>} />
             <Route path="/myjob" element={<PrivateRoute isAuthenticated={isAuthenticated}><Myjob/></PrivateRoute>} />
+            <Route path="/privatepassword" element={<PrivateRoute isAuthenticated={isAuthenticated}><PrivatePassword/></PrivateRoute>}/>
           </Routes>
         </div>
       </Router>

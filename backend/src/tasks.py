@@ -54,7 +54,7 @@ def get_tasks():
     else:
         return jsonify({'error': 'Acceso no autorizado'}), 401
 
-@app.route('/task/<id>', methods=['GET'])
+@app.route('/tasks/<id>', methods=['GET'])
 def getTask(id):
     tasks = db.find_one({'_id': ObjectId(id)})
 
@@ -82,7 +82,7 @@ def deleteTask(id):
 @app.route('/tasks/<id>', methods=['PUT'])
 def updateTask(id):
 
-    db.update_one({'_id': ObjectId(id)},{'$set':{
+    db.update_one({'_id': ObjectId(id)},{"$set": {
         'nameTasks': request.json['nameTasks'],
         'description': request.json['description'],
         'guy': request.json['guy'],

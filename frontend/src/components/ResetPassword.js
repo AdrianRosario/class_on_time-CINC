@@ -46,7 +46,7 @@ const ResetPassword = () => {
               <input
                 className="form-input"
                 id="txt-gmail"
-                type="text"
+                type="email"
                 placeholder="@Email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}

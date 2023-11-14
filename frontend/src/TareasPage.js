@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style/navbar_tareas.css";
 import user from "./asset/img/user (2).png";
 import logout from "./asset/img/logout.png";
+import chevron from './asset/img/icons8-chevron-down-26 (2).png'
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -54,7 +55,7 @@ const TareasPage = ({ setIsAuthenticated }) => {
       <header className="head-navbar">
         <div className="header-left">
           <div className="logo">
-            <Link to="/" className="log" target="_black">
+            <Link to="/tareas" className="log">
               <h1 className="logo">
                 Class <br />
                 &nbsp; &nbsp; &nbsp; &nbsp; On
@@ -90,6 +91,32 @@ const TareasPage = ({ setIsAuthenticated }) => {
                   Mi Trabajo
                   <span className="material-symbols-outlined">engineering</span>
                 </Link>
+              </li>
+
+              <li className="menu__item  menu__item--show">
+                <Link href="#" className="menu__link">
+                  Setting
+                  {/* <span className="menu__arrow" class="material-symbols-outlined">chevron_right</span> */}
+                  <img
+                    src={chevron}
+                    className="menu__arrow" 
+                  />
+                </Link>
+                <ul className="menu__nesting">
+                  <li className="menu__inside">
+                    <Link to="/privatepassword" className="menu__link menu__link--inside">
+                      Reset  Password
+                    </Link>
+                  </li>
+                  {/* <li className="menu__inside">
+                    <Link
+                      to="#"
+                      className="menu__link menu__link--inside"
+                    >
+                      Closet
+                    </Link>
+                  </li> */}
+                </ul>
               </li>
             </ul>
           </nav>

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import TareasPage from "../TareasPage";
+import {} from './Updata'
 
 import "../style/add_tareas.css";
 

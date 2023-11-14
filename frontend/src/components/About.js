@@ -2,6 +2,12 @@ import React from 'react'
 import Menu from './Menu'
 
 const About = () => {
+
+function prueba (){
+    return;
+    
+}
+
   return (
     <div>
         <Menu/>
@@ -10,4 +16,4 @@ const About = () => {
   )
 }
 
-export default About
+export default  About

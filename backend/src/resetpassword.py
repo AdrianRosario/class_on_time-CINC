@@ -4,6 +4,7 @@ from src import app
 from src.tasks import mongo
 import yagmail
 import random
+from flask_pymongo import PyMongo, ObjectId
 
 db = mongo.db.userb
 
@@ -31,3 +32,22 @@ def resetpassword ():
     else:
         return jsonify({'msg': 'Email not found'})
         
+
+@app.route('/hola/<id>', methods=['PUT'])
+def createPassword(id):
+    if 'password' not in request.json or 'nuevo_password' not in request.json:
+        return jsonify({'msg': 'Faltan campos en la solicitud'}), 400
+
+    
+    user = db.find_one({'_id': ObjectId(id)})
+
+   
+    if user and check_password_hash(user['password'], request.json['password']):
+        
+        db.update_one({'_id': ObjectId(id)}, {"$set": {'password': generate_password_hash( request.json['nuevo_password'])}})
+        return jsonify({'msg': 'Contraseña actualizada correctamente'})
+
+    return jsonify({'msg': 'Contraseña actual incorrecta'}), 401
+
+    
+

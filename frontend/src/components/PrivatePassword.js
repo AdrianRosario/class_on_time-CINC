@@ -9,7 +9,7 @@ function PrivatePassword() {
         <form  className="form-pp">
           <div className="con-pp">
             <header className="form-head-pp">
-              <h2>Log In</h2>
+              <h2>ResetPassword</h2>
               <p>login here using your username and password</p>
             </header>
             <br />

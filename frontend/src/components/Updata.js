@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import TareasPage from "../TareasPage";
 // import { getTasks, editTasks } from "./Education";
+import Educacion from './Education'
 
 
 const backend = process.env.REACT_APP_BACKEND;
@@ -111,5 +112,5 @@ const Updata = () => {
   );
 };
 
-export default Updata
+export default Updata;
 

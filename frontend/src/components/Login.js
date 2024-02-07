@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../style/login.css";
-import jwtDecode from "jwt-decode";
+
 import Menu from "./Menu";
 
 const backend = process.env.REACT_APP_BACKEND;
@@ -39,34 +39,10 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("isAuthenticated", "true");
       navegate("/tareas");
 
-      // const res = await fetch(`${backend}/protected`,{
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: `Bearer ${accessToken}`,
-      //   },
-      // });
-
-      // alert(res.data.msg);
     } else {
       console.error("Error de inicio de sesion");
     }
 
-    // const makeAuthenticatedRequest = async (method, url, data) => {
-    //   // Agrega el token de acceso a los encabezados de la solicitud
-    //   const accessToken = localStorage.getItem("jwt_token");
-
-    //   const res = await fetch(`${backend}/protected`,{
-    //     method,
-    //     url,
-    //     data,
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken}`,
-    //     },
-
-    //   });
-
-    //   return res;
-    // };
   };
 
   return (

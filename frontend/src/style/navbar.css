@@ -18,6 +18,8 @@
     padding: 0 50px;
     background:#8FBF9F;
     font-size: 20px;
+    z-index: 2;
+    
 }
 .logo{
     font-size: 20px;

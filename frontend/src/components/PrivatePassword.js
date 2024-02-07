@@ -1,12 +1,54 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState} from "react";
 import TareasPage from "../TareasPage";
 
-function PrivatePassword() {
+
+const backend = process.env.REACT_APP_BACKEND;
+
+
+const PrivatePassword = () => {
+
+
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [menssage, setMessage] = useState("");
+
+  const clearFields = () => {
+    setCurrentPassword('');
+    setNewPassword('');
+  }
+ 
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    
+      try {
+        const response = await fetch(`${backend}/createpassword`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+           
+          },
+          body: JSON.stringify({
+            password: currentPassword,
+            newpassword: newPassword,
+          }),
+        });
+    
+       const data = await response.json();
+       console.log(data)
+       clearFields();
+      } catch (error) {
+        console.error('Error updating password:', error);
+        setMessage('Error en la solicitud');
+      }
+    };
+  
+
   return (
     <Fragment>
       <TareasPage />
       <div className="overlay-pp">
-        <form  className="form-pp">
+        <form className="form-pp" onSubmit={handleChangePassword}>
           <div className="con-pp">
             <header className="form-head-pp">
               <h2>ResetPassword</h2>
@@ -14,34 +56,38 @@ function PrivatePassword() {
             </header>
             <br />
             <div className="field-pp">
-                <label className="label-pp">ingrese su password actual :</label>
+              {/* <label>id del usuario: {id}</label> */}
+             {/* <input type="text" value={id} onChange={(e) => setId(e.target.value)} />  */}
+              <label className="label-pp">ingrese su password actual :</label>
               <input
                 className="form-input"
-                id="txt-input"
-                type="email"
+                id="password"
+                type="Password"
                 placeholder="ingrese su password actual:"
                 required=""
-                // onChange={(e) => setEmail(e.target.value)}
-                // value={email}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                value={currentPassword}
               />
-               <label className="label-pp">Nueva Password</label>
+              <label className="label-pp">Nueva Password</label>
               <input
                 className="form-input"
-                id="txt-input"
-                type="email"
+                id="newpassword"
+                type="Password"
                 placeholder="Nueva Password"
                 required=""
-                // onChange={(e) => setEmail(e.target.value)}
-                // value={email}
+                onChange={(e) => setNewPassword(e.target.value)}
+                value={newPassword}
               />
-              <br/>
-               <button className="log-pp"> Enviar </button>
+              <br />
+              <button className="log-pp"> Enviar </button>
             </div>
           </div>
         </form>
+    
       </div>
+        
     </Fragment>
   );
-}
+};
 
 export default PrivatePassword;

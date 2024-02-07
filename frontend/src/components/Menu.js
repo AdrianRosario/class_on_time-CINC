@@ -1,10 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../style/navbar.css";
 
 const Menu = () => {
   const location = useLocation();
   const shouldRenderNavbar = location.pathname !== "/tareas";
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <Fragment>
       {shouldRenderNavbar && (
@@ -18,37 +28,41 @@ const Menu = () => {
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Time
               </h1>
             </div>
-            <nav>
+            <nav className={menuOpen ? "active" : ""}>
               <ul>
                 <li>
-                  <Link to="/" className="active">
+                  <Link to="/" className="active" onClick={closeMenu}>
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/tareas" target="_blank" rel="noopener noreferrer">
+                  <Link to="/tareas" onClick={closeMenu}>
                     Tareas
                   </Link>
                 </li>
                 <li>
-                  <Link to="">Recursos</Link>
+                  <Link to="/recursos" onClick={closeMenu}>
+                    Recursos
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/About">About</Link>
+                  <Link to="/about" onClick={closeMenu}>
+                    About
+                  </Link>
                 </li>
               </ul>
               <div className="login-signup">
-                <Link to="/login">Login</Link> or{" "}
-                <Link to="/registro">Signup</Link>
+                <Link to="/login" onClick={closeMenu}>Login</Link> or{" "}
+                <Link to="/registro" onClick={closeMenu}>Signup</Link>
               </div>
             </nav>
           </div>
           <div className="header-right">
             <div className="login-signup">
-              <Link to="/login">Login</Link> or{" "}
-              <Link to="/registro">Signup</Link>
+              <Link to="/login" onClick={closeMenu}>Login</Link> or{" "}
+              <Link to="/registro" onClick={closeMenu}>Signup</Link>
             </div>
-            <div className="hamburger">
+            <div className={`hamburger ${menuOpen ? "open" : ""}`} onClick={toggleMenu}>
               <div />
               <div />
               <div />
@@ -56,8 +70,9 @@ const Menu = () => {
           </div>
         </header>
       )}
-      
     </Fragment>
   );
 };
+
+
 export default Menu;

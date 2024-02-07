@@ -1,19 +1,17 @@
-import React from 'react'
-import Menu from './Menu'
+import React from "react";
+
+import '../style/google.css';
+import Menu from "./Menu";
+
 
 const About = () => {
-
-function prueba (){
-    return;
-    
-}
-
   return (
-    <div>
-        <Menu/>
-      <h1> hola bro</h1>
-    </div>
+    <>
+     <Menu/>
+    <h1>soy about</h1>
+    </>
   )
 }
 
-export default  About
+
+export default About;

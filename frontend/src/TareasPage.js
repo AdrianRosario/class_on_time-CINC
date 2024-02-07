@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./style/navbar_tareas.css";
 import user from "./asset/img/user (2).png";
@@ -8,7 +8,18 @@ import chevron from './asset/img/icons8-chevron-down-26 (2).png'
 const backend = process.env.REACT_APP_BACKEND;
 
 const TareasPage = ({ setIsAuthenticated }) => {
-  const navegate = useNavigate();
+ 
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+
+    if (!isAuthenticated) {
+      // If not authenticated, redirect to login page
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleLogout = async () => {
     // // localStorage.removeItem("user");
@@ -35,7 +46,7 @@ const TareasPage = ({ setIsAuthenticated }) => {
       localStorage.removeItem("jwt_token");
       // window.location.reload()
       // setIsAuthenticated(false);
-      navegate("/");
+      navigate("/");
     } else {
       console.log("Logout failed");
     }

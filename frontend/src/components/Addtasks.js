@@ -25,6 +25,7 @@ const Addtasks = () => {
 
     const user_id = sessionStorage.getItem('user_id');
     const authentication_token = localStorage.getItem('authentication_token');
+    console.log('Authentication Token:', authentication_token);
 
 
     const res = await fetch(`${backend}/tasks`, {

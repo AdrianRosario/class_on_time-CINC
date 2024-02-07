@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import Inicio from "./components/Inicio";
@@ -24,6 +24,8 @@ function App() {
     initialAuthenticatedStatus
   );
 
+
+
   
   return (
     <Fragment>
@@ -35,16 +37,16 @@ function App() {
               path="/login"
               element={<Login setIsAuthenticated={setIsAuthenticated} />}
             />
-            <Route path="/Registro" element={<Registro_U />} />
+            <Route path="/registro" element={<Registro_U setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/resetpassword" element={<ResetPassword/>}/>
-            <Route path="/about" element={<About />} />
+            <Route path="/about"   element={<About setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/updata" element={<Updata/>}/>
            
 
             <Route
                exact
               path="/tareas"
-              element={
+              element={ 
                 <PrivateRoute isAuthenticated={isAuthenticated}>
                   <TareasPage setIsAuthenticated={setIsAuthenticated} />
                 </PrivateRoute>
@@ -62,7 +64,7 @@ function App() {
             <Route path="/education" element={<PrivateRoute isAuthenticated={isAuthenticated}><Education/></PrivateRoute>} />
             <Route path="/mythings" element={<PrivateRoute isAuthenticated={isAuthenticated}><Mythings/></PrivateRoute>} />
             <Route path="/myjob" element={<PrivateRoute isAuthenticated={isAuthenticated}><Myjob/></PrivateRoute>} />
-            <Route path="/privatepassword" element={<PrivateRoute isAuthenticated={isAuthenticated}><PrivatePassword/></PrivateRoute>}/>
+            <Route path="/privatepassword"   element={<PrivateRoute isAuthenticated={isAuthenticated}><PrivatePassword/></PrivateRoute>}/>
           </Routes>
         </div>
       </Router>

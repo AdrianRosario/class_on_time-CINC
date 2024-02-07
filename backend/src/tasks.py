@@ -18,11 +18,20 @@ Session(app)
 
 
 @app.route('/tasks', methods=[ 'POST'])
+
 def creatTasks():
-    if 'user_id' in session:
-        current_user_id = session['user_id']
+    if 'user_id' in dataSession or 'google_user_id' in dataSession:
+        # Verificar si el usuario inició sesión con Google
+        if 'google_user_id' in dataSession:
+            current_user_id = dataSession['google_user_id']
+        else:
+            # Si no es un usuario de Google, utilizar el 'user_id' normal
+            current_user_id = dataSession['user_id']
+    # if 'user_id' in dataSession:
+    #     current_user_id = dataSession['user_id']
         id = db.insert_one({  
-            'user_id': ObjectId(current_user_id),
+            'user_id': current_user_id,
+            # 'user_id': ObjectId(current_user_id),
             'nameTasks': request.json['nameTasks'],
             'description': request.json['description'],
             'guy': request.json['guy'],
@@ -36,25 +45,42 @@ def creatTasks():
 
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
-    if 'user_id' in session:
-        current_user_id = session['user_id']
+    if 'user_id' in dataSession or 'google_user_id' in dataSession:
+        # Verificar si el usuario inició sesión con Google
+        if 'google_user_id' in dataSession:
+            current_user_id = dataSession['google_user_id']
+        else:
+            # Si no es un usuario de Google, utilizar el 'user_id' normal
+            current_user_id = dataSession['user_id']
+    # if 'user_id' in dataSession:
+    #     current_user_id = dataSession['user_id']
         task = []
-        for doc in db.find({'user_id':ObjectId(current_user_id)}):
+        for doc in db.find({'user_id': current_user_id}):
             task.append({
-                '_id':str(ObjectId(doc['_id'])),
-                'user_id':str(ObjectId(doc['user_id'])),
+                '_id': str(ObjectId(doc['_id'])),
+                'user_id': doc['user_id'],
                 'nameTasks': doc['nameTasks'],
                 'description': doc['description'],
                 'guy': doc['guy'],
                 'date': doc['date'],
+            })
+        # for doc in db.find({'user_id':ObjectId(current_user_id)}):
+        #     task.append({
+        #         '_id':str(ObjectId(doc['_id'])),
+        #         'user_id':str(ObjectId(doc['user_id'])),
+        #         'nameTasks': doc['nameTasks'],
+        #         'description': doc['description'],
+        #         'guy': doc['guy'],
+        #         'date': doc['date'],
                 
 
-            })
+        #     })
         return jsonify(task)
     else:
         return jsonify({'error': 'Acceso no autorizado'}), 401
 
 @app.route('/tasks/<id>', methods=['GET'])
+
 def getTask(id):
     tasks = db.find_one({'_id': ObjectId(id)})
 

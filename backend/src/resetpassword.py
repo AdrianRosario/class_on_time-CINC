@@ -1,10 +1,14 @@
-from flask import Flask, request, json, jsonify
+from flask import Flask, current_app, request, jsonify
+from flask_jwt_extended import decode_token
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_pymongo import PyMongo, ObjectId
 from src import app
 from src.tasks import mongo
 import yagmail
 import random
-from flask_pymongo import PyMongo, ObjectId
+from src.views import session, dataSession
+
+
 
 db = mongo.db.userb
 
@@ -33,21 +37,31 @@ def resetpassword ():
         return jsonify({'msg': 'Email not found'})
         
 
-@app.route('/hola/<id>', methods=['PUT'])
-def createPassword(id):
-    if 'password' not in request.json or 'nuevo_password' not in request.json:
-        return jsonify({'msg': 'Faltan campos en la solicitud'}), 400
+
+
+@app.route('/createpassword', methods=['PUT'])
+def create_password():
+    user_id = dataSession.get('user_id')
+
+    if not user_id:
+        return jsonify({'error': 'Usuario no autenticado'}), 401
+
+    print(user_id)
+    print("Request Json:", request.json)
+
+    user = db.find_one({'_id': ObjectId(user_id)})
+
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    if not check_password_hash(user['password'], request.json['password']):
+        return jsonify({'msg': 'Contraseña incorrecta'}), 401
+
+    new_password = generate_password_hash(request.json['newpassword'])
+
+    db.update_one({'_id': ObjectId(user_id)}, {"$set": {'password': new_password}})
 
     
-    user = db.find_one({'_id': ObjectId(id)})
-
-   
-    if user and check_password_hash(user['password'], request.json['password']):
-        
-        db.update_one({'_id': ObjectId(id)}, {"$set": {'password': generate_password_hash( request.json['nuevo_password'])}})
-        return jsonify({'msg': 'Contraseña actualizada correctamente'})
-
-    return jsonify({'msg': 'Contraseña actual incorrecta'}), 401
-
-    
+    response_data = {'msg': 'Contraseña actualizada', 'id': str(user_id)}
+    return jsonify(response_data), 200
 

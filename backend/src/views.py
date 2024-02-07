@@ -38,18 +38,38 @@ def createRegister():
     else: 
         return jsonify({'msg': 'correo ya registrado'})
 
+# @app.route('/register', methods=['GET'])
+# def getRegister():
+#     user = []
+#     for doc in db.find():
+#         user.append({
+#             '_id': str(ObjectId(doc['_id'])),
+#             'username': doc['username'],
+#             'email': doc['email'],
+#             'password': doc['password']
+#         })
+        
+#     return jsonify(user)
 @app.route('/register', methods=['GET'])
 def getRegister():
-    user = []
+    user_list = []
     for doc in db.find():
-        user.append({
-            '_id': str(ObjectId(doc['_id'])),
-            'username': doc['username'],
-            'email': doc['email'],
-            'password': doc['password']
-        })
+        # Verificar si 'username' está presente en el diccionario antes de intentar acceder a la clave
+        if 'username' in doc:
+            user_list.append({
+                '_id': str(ObjectId(doc['_id'])),
+                'username': doc['username'],
+                'email': doc['email'],
+                'password': doc['password']
+            })
+        else:
+            # Puedes manejar el caso en el que 'username' no está presente, dependiendo de tus necesidades
+            user_list.append({
+                '_id': str(ObjectId(doc['_id'])),
+                'message': 'Username not found'
+            })
         
-    return jsonify(user)
+    return jsonify(user_list)
 
 
 @app.route('/register/<id>', methods=['DELETE'])
@@ -64,7 +84,7 @@ def loginL():
     user = db.find_one({'email': request.json['email']})
 
     if user and check_password_hash(user['password'], request.json['password']):
-        session['user_id'] = str(user['_id'])
+        dataSession['user_id'] = str(user['_id'])
         # dataSession['user_id'] = str(user['_id'])
         # return jsonify({'msg': 'Inicio de sesion exitoso'})
         access_token = create_access_token(identity=str(user['_id']))
@@ -84,15 +104,18 @@ def loginL():
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.pop('user_id', None)
+    dataSession.pop('user_id', None)
+    dataSession.pop('google_token', None)
     return jsonify({'msg': 'Logout successful'}), 200
-
 
 @app.route('/protected', methods=['GET'])
 def protected():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = db.find_one({'_id': ObjectId(user_id)})
-        return jsonify({'msg': f"Hola, usuario{user['username']}!"})
-    else :
+    if 'user_id' in dataSession or 'google_token' in dataSession:
+        if 'user_id' in dataSession:
+            user_id = dataSession['user_id']
+            user = db.find_one({'_id': ObjectId(user_id)})
+            return jsonify({'msg': f"Hola, usuario {user['username']}!"})
+        elif 'google_token' in dataSession:
+            return jsonify({'msg': 'Hello, Google user!'})
+    else:
         return jsonify({'error': 'Acceso no autorizado'}), 401

@@ -15,6 +15,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import ResetPassword from "./components/ResetPassword";
 import Updata from "./components/Updata";
 import PrivatePassword from "./components/PrivatePassword";
+import Hometaks from "./components/hometaks";
+import Shareuser from "./components/Shareuser";
+import CardDrag from "./components/CardDrag";
+import Createcard from "./components/Createcard";
+import WorkSpace from "./components/WorkSpace";
+import Menu2 from "./components/Menu2";
+
 
 function App() {
   const initialAuthenticatedStatus =
@@ -41,7 +48,14 @@ function App() {
             <Route path="/resetpassword" element={<ResetPassword/>}/>
             <Route path="/about"   element={<About setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/updata" element={<Updata/>}/>
+            <Route path="/carddrag" element={<CardDrag/>}/>
+            <Route path="/createcard" element={<Createcard/>}/>
+            <Route path="/espaciodetrabajo" element={<WorkSpace/>}/>
+            <Route path="/Menu2" element={<Menu2/>}/>
            
+
+            <Route path="/hometaks" element={<PrivateRoute isAuthenticated={isAuthenticated}><Hometaks/></PrivateRoute>}/>
+            <Route path="/shareuser" element={<PrivateRoute isAuthenticated={isAuthenticated}><Shareuser/></PrivateRoute>}/>
 
             <Route
                exact

@@ -1,28 +1,142 @@
- @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-    font-family: 'Lobster', cursive;
+
+.logo h1{
+    color: #050505;
+    font-size: 21px;
+}
+header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-shadow: 0px 187px 75px #00000003, 0px 105px 63px #0000000d, 0px 47px 47px #00000017, 0px 12px 26px #0000001a, 0px 0px 0px #0000001a;
+    background: #f3f0f0;
+}
+header .header-left {
+    display: flex;
+    align-items: center;
+}
+header .header-left .logo {
+   padding-top: 5px;
+}
+header .header-left nav {
+    margin-left: 75px;
+}
+header .header-left nav ul {
+    display: flex;
+}
+nav ul li a {
+    display: block;
+    color: #070707;
+    font-size: 23px;
+    padding: 20px 18px;
+    transition: 0.2s;
+}
+nav ul li a:hover{
+    color: #041da8;
+}
+nav .login-signup {
+    display: none;
+}
+header .header-right {
+    display: flex;
+    align-items: center;
+}
+header .login-signup {
+    color: #0a0a0a;
+    font-weight: bold;
+}
+header .login-signup a {
+    display: inline-block;
+    color: #010101;
+    background: transparent;
+    padding: 5px 12px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 20px;
+}
+header .header-right .hamburger {
+    margin-left: 20px;
+    cursor: pointer;
+    display: none;
+}
+header .header-right .hamburger div {
+    width: 30px;
+    height: 2px;
+    margin: 6px 0;
+    background: #070707;
+}
+@media only screen and (max-width: 1000px) {
+    header {
+        padding: 0 20px;
+    }
+    header .header-right .hamburger {
+        display: block;
+    }
+    header .header-left nav {
+        margin: 0;
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: fit-content;
+        background-color: #212121;
+        padding: 30px;
+        transition: 0.3s;
+        text-align: center;
+        z-index: 2;
+    }
+    header .header-left nav.active {
+        top: 70px;
+    }
+    header .header-left nav ul {
+        display: block;
+    }
+}
+@media only screen and (max-width: 500px) {
+    nav .login-signup {
+        display: block;
+        margin-top: 20px;
+    }
+    body {
+        background-position: left -290px bottom 20px;
+        
+        background-size: 200%;
+        
+    }
+    header .header-right .login-signup {
+        display: none;
+    }
+    .logo h1 {
+        font-size: 20px;
+        padding-bottom: 35px;
+    }
 }
 
-.head-navbar {
+/* .head-navbar {
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 50px;
-    background:#8FBF9F;
+    background:transparent;
     font-size: 20px;
-    z-index: 2;
+    
     
 }
+
+.head-navbar .header-left {
+    z-index: 1;
+    
+}
+
+
 .logo{
     font-size: 20px;
+    color: #fff;
 }
 .head-navbar .header-left {
     display: flex;
@@ -39,14 +153,14 @@
 }
 nav ul li a {
     display: block;
-    color: #100f0f;
+    color: #fff;
     font-size: 20px;
     padding: 5px 25px;
     transition: 0.2s;
 }
 nav ul li a:hover,
 nav ul li a.active {
-    color: #100f0f;
+    color: #fff;
 }
 nav .login-signup {
     display: none;
@@ -56,13 +170,13 @@ nav .login-signup {
     align-items: center;
 }
 .head-navbar .login-signup {
-    color: #100f0f;
+    color: #fff;
     font-weight: bold;
 }
 .head-navbar .login-signup a {
     display: inline-block;
-    color: #100f0f;
-    background: #F18F01 ;
+    color: #fff;
+    background: transparent ;
     padding: 5px 12px;
     border-radius: 5px;
 }
@@ -75,7 +189,7 @@ nav .login-signup {
     width: 30px;
     height: 2px;
     margin: 6px 0;
-    background: #100f0f;
+    background: #fff;
 }
 @media only screen and (max-width: 1000px) {
     .head-navbar {
@@ -91,7 +205,7 @@ nav .login-signup {
         left: 0;
         width: 100%;
         height: fit-content;
-        background-color: #0b2239;
+        background-color: #fff;
         padding: 30px;
         transition: 0.3s;
         text-align: center;
@@ -103,6 +217,9 @@ nav .login-signup {
     .head-navbar .header-left nav ul {
         display: block;
     }
+    .nav-menu.active {
+        z-index: 1;
+    }
 }
 @media only screen and (max-width: 500px) {
     nav .login-signup {
@@ -112,4 +229,7 @@ nav .login-signup {
     .head-navbar .header-right .login-signup {
         display: none;
     }
-}
+    .nav-menu.active{
+        z-index: 1;
+    }
+} */

@@ -1,155 +1,246 @@
-import React, { Fragment, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import {useNavigate, NavLink } from "react-router-dom";
 import "./style/navbar_tareas.css";
-import user from "./asset/img/user (2).png";
-import logout from "./asset/img/logout.png";
-import chevron from './asset/img/icons8-chevron-down-26 (2).png'
+import user from "./asset/img/icons8-user-40.png";
+import logout from "./asset/img/icons8-logout-40 (2).png";
+import chevron from "./asset/img/icon.png";
+import imgprueba from'./asset/img/774418072505.jpg'
+import './style/menu2.css'
 
 const backend = process.env.REACT_APP_BACKEND;
 
 const TareasPage = ({ setIsAuthenticated }) => {
- 
-
   const navigate = useNavigate();
+  const [click, setClick] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showSalida, setShowSalida] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
+  const [titlecolunm, setTitlecolunm] = useState("")
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
     if (!isAuthenticated) {
       // If not authenticated, redirect to login page
-      navigate('/login');
+      navigate("/login");
     }
   }, [navigate]);
 
   const handleLogout = async () => {
-    // // localStorage.removeItem("user");
-    // localStorage.removeItem('isAuthenticated');
-    // // setIsAuthenticated(false);
-    // window.location.reload();
-    // navegate('/');
+    try {
+      const res = await fetch(`${backend}/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const res = await fetch(`${backend}/logout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      // const data = await res.json();
+      // console.log(data)
 
-    // const data = await res.json();
-    // console.log(data)
+      if (res.status === 200) {
+        const data = await res.json();
+        setMessage(data.msg);
 
-    if (res.status === 200) {
-      const data = await res.json();
-      console.log(data);
-
-      localStorage.removeItem("isAuthenticated");
-      localStorage.removeItem("jwt_token");
-      // window.location.reload()
-      // setIsAuthenticated(false);
-      navigate("/");
-    } else {
-      console.log("Logout failed");
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("jwt_token");
+        // window.location.reload()
+        // setIsAuthenticated(false);
+        navigate("/");
+      } else {
+        setMessage("login failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-
-    // const data = await res.json();
-    // console.log(data)
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("isAuthenticated");
-
-    // setIsAuthenticated(false);
-
-    // navegate("/");
+  };
+  const clearFields = () => {
+    setTitlecolunm("");
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${backend}/colunm`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify({
+          titlecolunm
+        }),
+      });
+
+      if (res.status === 200){
+        const data = await res.json();
+        console.log(data)
+        clearFields();
+      }
+      
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+
+    // showSalida(false);
+  };
+  
+
+  const handleClick = () => setClick(!click);
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   showSalida(false);
+  // };
+
+  const toggleCreate = () => {
+    setShowCreate(!showCreate);
+  };
+  const toggleSalida = () => {
+    setShowSalida(!showSalida);
+  };
+
+
   return (
-    <Fragment>
-      <header className="head-navbar">
-        <div className="header-left">
-          <div className="logo">
-            <Link to="/tareas" className="log">
-              <h1 className="logo">
-                Class <br />
-                &nbsp; &nbsp; &nbsp; &nbsp; On
-                <br />
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Time
-              </h1>
-            </Link>
+    <>
+      <header className="head">
+        <div className="header-t">
+          <div className="btn-menu">
+            <label  className="cierre">
+              ☰
+            </label>
           </div>
-          <nav>
+          <div className="logo-t">
+            <h3>prueba h1</h3>
+          </div>
+          <nav className="nav-t">
             <ul>
               <li>
-                <Link to="/Addtasks" className="active">
-                  Add
-                  <span className="material-symbols-outlined">add</span>
-                </Link>
+                <NavLink to="/espaciodetrabajo" className="link">
+                  Tablero
+                </NavLink>
               </li>
               <li>
-                <Link to="/Education">
-                  Educacion
-                  <span className="material-symbols-outlined">menu_book</span>
-                </Link>
+                <NavLink to="" className="link" onClick={toggleCreate}>
+                  Crear
+                </NavLink>
               </li>
-              <li>
-                <Link to="/Mythings">
-                  Mis Cosas
-                  <span className="material-symbols-outlined">
-                    person_raised_hand
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/Myjob">
-                  Mi Trabajo
-                  <span className="material-symbols-outlined">engineering</span>
-                </Link>
-              </li>
-
-              <li className="menu__item  menu__item--show">
-                <Link href="#" className="menu__link">
-                  Setting
-                  {/* <span className="menu__arrow" class="material-symbols-outlined">chevron_right</span> */}
-                  <img
-                    src={chevron}
-                    className="menu__arrow" 
-                  />
-                </Link>
-                <ul className="menu__nesting">
-                  <li className="menu__inside">
-                    <Link to="/privatepassword" className="menu__link menu__link--inside">
-                      Reset  Password
-                    </Link>
-                  </li>
-                  {/* <li className="menu__inside">
-                    <Link
-                      to="#"
-                      className="menu__link menu__link--inside"
-                    >
-                      Closet
-                    </Link>
-                  </li> */}
-                </ul>
-              </li>
+              {showCreate && (
+                <li>
+                  <div className="card-create-t">
+                    <div className="mver-card">
+                      {!showSalida && (
+                        <button className="btn-mver"  onClick={toggleSalida}>
+                          Crear tablero
+                        </button>
+                      )}
+                    </div>
+                    {showSalida && (
+                      <div className="card-form">
+                        <form onSubmit={handleSubmit}>
+                          <label className="lb-create">Crear tablero</label>
+                          <input
+                            className="input-create"
+                            type="text"
+                            placeholder="Titulo del tablero"
+                            onChange={(e) => setTitlecolunm(e.target.value)}
+                            value={titlecolunm}
+                          />
+                          <button className="btn-cr">Crear</button>
+                        </form>
+                        
+                        <button className="btn-cr-cl" onClick={toggleSalida}>
+                          {" "}
+                          <span className="material-symbols-outlined">close</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </li>
+              )}
             </ul>
+            {/* <div className="login-signup-t">
+              <NavLink to="/shareuser" className="link">
+                <span className="material-symbols"> person_add </span>Compartir
+              </NavLink>
+            </div> */}
           </nav>
         </div>
-        <div className="header-logout">
-          <div className="logout-signup">
-            <Link className="button-L" onClick={handleLogout}>
-              <img src={user} alt="" />
-              <div className="logout-L">
-                Logout
-                <img src={logout} alt="" />
-              </div>
-            </Link>
-          </div>
-          <div className="hamburger">
-            <div />
-            <div />
-            <div />
+        <div className="header-right-t">
+          {/* <div className="login-signup-t">
+            
+            <button>
+              <span className="material-symbols-outlined"> person_add </span>
+              <span className="lable">Compartir</span>
+            </button>
+            
+          </div> */}
+          <div className="hamburger-t">
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
         </div>
       </header>
-    </Fragment>
+
+      <div className="capa"></div>
+
+      <input type="checkbox" id="btn-menu" />
+      <div className="container-menu">
+        <div className="cont-menu">
+          <nav className="nav-l">
+            <NavLink to="#" className="link">
+              <span className="material-symbols-outlined"> person </span>
+              Miembros
+              <span className="material-symbols-outlined"> add </span>
+            </NavLink>
+            <NavLink to="#" className="link">
+              <span className="material-symbols-outlined"> settings </span>
+              Ajuste del Espacio de trabajo
+            </NavLink>
+            <br />
+
+            <label className="label-sindebar">
+              Vista del Espacio de trabajo
+            </label>
+            <NavLink to="#" className="link">
+              <span className="material-symbols-outlined"> data_table </span>
+              Tabla
+            </NavLink>
+            <NavLink to="#" className="link">
+              <span className="material-symbols-outlined">
+                {" "}
+                calendar_month{" "}
+              </span>
+              Calendario
+            </NavLink>
+
+            <label className="label-sindebar">
+              Sus tablero <span className="material-symbols-outlined">add</span>
+            </label>
+            <ul className="nav-list">
+              <li className="profile">
+                <div className="profile_details">
+                  <img src={imgprueba} alt="profile image" />
+                  <div className="profile_content">
+                    <div className="name">Anna Jhon</div>
+                    <div className="designation">Admin</div>
+                  </div>
+                </div>
+                {/* <i class="bx bx-log-out" id="log_out"></i> */}
+                <span className="material-symbols-outlined" id="log_out" >logout</span>
+              </li>
+            </ul>
+          </nav>
+
+          <label  className="cierre">
+            ✖️
+          </label>
+        </div>
+      </div>
+    </>
   );
 };
 

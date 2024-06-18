@@ -1,71 +1,86 @@
 import React, { Fragment, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 import "../style/navbar.css";
 
 const Menu = () => {
   const location = useLocation();
   const shouldRenderNavbar = location.pathname !== "/tareas";
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [click, setClick] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
+  const handleClick = () => setClick(!click);
   return (
     <Fragment>
       {shouldRenderNavbar && (
-        <header className="head-navbar">
+        <header>
           <div className="header-left">
             <div className="logo">
-              <h1 className="logo">
-                Class <br />
-                &nbsp; &nbsp; &nbsp; &nbsp; On
-                <br />
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Time
-              </h1>
+              <NavLink to="/" className="log">
+                <h1 >
+                  Class <br />
+                  &nbsp; &nbsp; &nbsp; &nbsp; On
+                  <br />
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Time
+                </h1>
+              </NavLink>
             </div>
-            <nav className={menuOpen ? "active" : ""}>
+            <nav className={click ? "nav-menu active" : "nav-menu"}>
               <ul>
                 <li>
-                  <Link to="/" className="active" onClick={closeMenu}>
+                  <NavLink to="/" className="active" onClick={handleClick}>
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/tareas" onClick={closeMenu}>
+                  <NavLink
+                    to="/espaciodetrabajo"
+                    className="active"
+                    onClick={handleClick}
+                  >
                     Tareas
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/recursos" onClick={closeMenu}>
+                  <Link to="/recursos" className="active" onClick={handleClick}>
                     Recursos
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" onClick={closeMenu}>
+                  <NavLink
+                    to="/about"
+                    
+                    onClick={handleClick}
+                  >
                     About
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
               <div className="login-signup">
-                <Link to="/login" onClick={closeMenu}>Login</Link> or{" "}
-                <Link to="/registro" onClick={closeMenu}>Signup</Link>
+                <NavLink to="/login" onClick={handleClick}>
+                  Login
+                </NavLink>{" "}
+                or{" "}
+                <NavLink to="/registro" onClick={handleClick}>
+                  Signup
+                </NavLink>
               </div>
             </nav>
           </div>
           <div className="header-right">
             <div className="login-signup">
-              <Link to="/login" onClick={closeMenu}>Login</Link> or{" "}
-              <Link to="/registro" onClick={closeMenu}>Signup</Link>
+              <NavLink to="/login" onClick={handleClick}>
+                Login
+              </NavLink>{" "}
+              or{" "}
+              <NavLink to="/registro" onClick={handleClick}>
+                Signup
+              </NavLink>
             </div>
-            <div className={`hamburger ${menuOpen ? "open" : ""}`} onClick={toggleMenu}>
-              <div />
-              <div />
-              <div />
+            <div className="hamburger" onClick={handleClick}>
+              {click ? (
+                <span className="material-symbols-outlined">close</span>
+              ) : (
+                <span className="material-symbols-outlined">menu</span>
+              )}
             </div>
           </div>
         </header>

@@ -1,0 +1,100 @@
+// <Fragment>
+    //   <header className="head-navbar">
+    //     <div className="header-left">
+    //       <div className="logo">
+    //         <NavLink to="/hometaks">
+    //           <h1 className="lg">
+    //             Class <br />
+    //             &nbsp; &nbsp; &nbsp; &nbsp; On
+    //             <br />
+    //             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Time
+    //           </h1>
+    //         </NavLink>
+    //       </div>
+    //       <nav className={click ? "nav-menu active" : "nav-menu"}>
+    //         <ul>
+    //           <li>
+    //             <NavLink
+    //               to="/Addtasks"
+    //               className="active"
+    //               onClick={handleClick}
+    //             >
+    //               Add
+    //               <span className="material-symbols-outlined">add</span>
+    //             </NavLink>
+    //           </li>
+    //           <li>
+    //             <NavLink to="/Education" onClick={handleClick}>
+    //               Educacion
+    //               <span className="material-symbols-outlined">menu_book</span>
+    //             </NavLink>
+    //           </li>
+    //           <li>
+    //             <NavLink to="/Mythings" onClick={handleClick}>
+    //               Mis Cosas
+    //               <span className="material-symbols-outlined">
+    //                 person_raised_hand
+    //               </span>
+    //             </NavLink>
+    //           </li>
+    //           <li>
+    //             <NavLink to="/Myjob" onClick={handleClick}>
+    //               Mi Trabajo
+    //               <span className="material-symbols-outlined">engineering</span>
+    //             </NavLink>
+    //           </li>
+
+    //           <li className="menu__item  menu__item--show">
+    //             <NavLink
+    //               to="/privatepassword"
+    //               className="menu__link"
+    //               onClick={handleClick}
+    //             >
+    //               Setting
+    //               <img src={chevron} className="menu__arrow" />
+    //             </NavLink>
+    //             <ul className="menu__nesting">
+    //               <li className="menu__inside">
+    //                 <NavLink
+    //                   to="/privatepassword"
+    //                   className="menu__link menu__link--inside"
+    //                   onClick={handleClick}
+    //                 >
+    //                   Reset Password
+    //                 </NavLink>
+    //               </li>
+    //             </ul>
+    //           </li>
+    //         </ul>
+    //         <div className="logout-signup">
+    //           <NavLink className="button-L" onClick={handleLogout}>
+    //             {" "}
+    //             Logout
+    //           </NavLink>
+    //         </div>
+    //       </nav>
+    //     </div>
+    //     <div className="header-logout">
+    //       <div className="logout-signup">
+    //         <NavLink className="button-L" onClick={handleLogout}>
+    //           <img src={user} alt="" />
+    //           <div className="logout-L">
+    //             Logout
+    //             <img src={logout} alt="" />
+    //           </div>
+    //         </NavLink>
+    //       </div>
+    //       <div className="hamburger" onClick={handleClick}>
+    //         {click ? (
+    //           <span className="material-symbols-outlined">close</span>
+    //         ) : (
+    //           <span className="material-symbols-outlined">menu</span>
+    //         )}
+    //       </div>
+    //     </div>
+    //   </header>
+      
+      
+
+    //   {message && <p>{message}</p>}
+    // </Fragment>

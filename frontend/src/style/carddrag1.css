@@ -1,0 +1,82 @@
+.card-mv {
+  position: absolute;
+  top: 78%; /* Ajusta según sea necesario */
+  left: 90%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 300px;
+
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001; /* Asegura que esté por encima de la lista */
+}
+
+.card-mv .pst-mv {
+  /* position: absolute; 
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);  */
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pst-mv .lb-mv {
+  padding-left: 32%;
+  font-size: 18px;
+  
+}
+.pst-mv span{
+  cursor: pointer;
+}
+
+.card-mv .lb-mv {
+  font-size: 14px;
+  color: #000;
+ padding-bottom: 10px;
+  
+}
+.card-mv .btn-mv{
+  color: #000;
+  width: 300px;
+  height: 37px;
+  padding-right: 40%;
+  background: #091E420F;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: none;
+}
+.card-mv .btn-mv span{
+    font-size: 25px;
+    padding: 1px;
+    padding-bottom: 15px ;
+}
+.card-mv .lb-dt{
+    font-size: 14px;
+    
+}
+
+.mv-dt .lb-lt{
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.mv-dt .slt-mv{
+    width: 300px;
+    height: 38px;
+    border-radius: 5px;
+    border: none;
+    background: #091E420F;
+    font-size: 16px;
+    
+}
+
+
+.mv-dt .option{
+    font-size: 16px;
+    color: #000; 
+    
+}

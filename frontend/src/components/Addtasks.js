@@ -1,9 +1,6 @@
 import React, { Fragment, useState } from "react";
 import TareasPage from "../TareasPage";
-import {} from './Updata'
-
 import "../style/add_tareas.css";
-
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -12,48 +9,50 @@ const Addtasks = () => {
   const [description, setDescription] = useState("");
   const [guy, setGuy] = useState("");
   const [date, setDate] = useState("");
+  const [message, setMessage] = useState("");
 
   const clearFields = () => {
-    setNameTasks('');
-    setDescription('');
-    setGuy('');
-    setDate('');
+    setNameTasks("");
+    setDescription("");
+    setGuy("");
+    setDate("");
   };
 
   const handlesubmin = async (e) => {
     e.preventDefault();
+    try {
+      const user_id = sessionStorage.getItem("user_id");
+      const authentication_token = localStorage.getItem("authentication_token");
 
-    const user_id = sessionStorage.getItem('user_id');
-    const authentication_token = localStorage.getItem('authentication_token');
-    console.log('Authentication Token:', authentication_token);
+      const res = await fetch(`${backend}/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authentication_token}`,
+        },
 
+        body: JSON.stringify({
+          nameTasks,
+          description,
+          guy,
+          date,
+          user_id,
+        }),
+      });
 
-    const res = await fetch(`${backend}/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${authentication_token}`,
-      },
-      body: JSON.stringify({
-        nameTasks,
-        description,
-        guy,
-        date,
-        user_id,
-      
-      }),
-    });
-    if (res.status === 200) {
-      const data = await res.json();
-      console.log("tarea agregada", data);
-      clearFields();
-    }else {
-      console.error("error al agregar tarea")
+      if (res.status === 200) {
+        const data = await res.json();
+        setMessage(data.message);
+        clearFields();
+      } else {
+        const errorData = await res.json();
+        setMessage(errorData.message);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
-    // const data = await res.json();
-    // console.log("tarea agregada", data);
-    // clearFields();
   };
+
   return (
     <Fragment>
       <TareasPage />
@@ -61,30 +60,29 @@ const Addtasks = () => {
         <form className="form-add" onSubmit={handlesubmin}>
           <div className="add">
             <header className="form-head">
-              <h1>Add Tareas</h1>
+              <h1 >Add Tareas</h1>
             </header>
+            {message && <p>{message}</p>}
             <div className="add-a">
               <label form="txt-input">Nombre de la Tarea *</label>
               <input
-                className="input-A"
                 type="text"
                 id="nombre_tareas"
                 placeholder="Add Tareas"
+                
+                required
                 onChange={(e) => setNameTasks(e.target.value)}
                 value={nameTasks}
-                autoFocus
-                required
               />
               <label form="descripcion">Descripcion* </label>
               <textarea
-                className="textarea-A"
                 id="descripcion"
                 placeholder="Add Tareas"
+                required
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
-                
-                required
-              />
+              ></textarea>
+
               <label form="Date">Date*</label>
               <input
                 type="date"
@@ -95,14 +93,14 @@ const Addtasks = () => {
               />
               <label form="tipos">Tipos*</label>
               <select
-                className="select-A"
                 id="tipos"
                 onChange={(e) => setGuy(e.target.value)}
                 value={guy}
               >
-                <option>Educacion</option>
-                <option>MiCosas</option>
-                <option>MiTrabajo</option>
+                <option value="">Seleccione un tipo</option>
+                <option value="Education">Education</option>
+                <option value="Mythings">Mythings</option>
+                <option value="Myjob">Myjob</option>
               </select>
               <br />
               <button className="button-A">Create</button>
@@ -110,6 +108,8 @@ const Addtasks = () => {
           </div>
         </form>
       </div>
+
+     
     </Fragment>
   );
 };

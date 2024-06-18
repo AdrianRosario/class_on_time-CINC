@@ -13,3 +13,4 @@ import src.views
 import src.tasks
 import src.resetpassword
 import src.googlelogin
+import src.board

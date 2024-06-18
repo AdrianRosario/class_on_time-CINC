@@ -4,15 +4,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo, ObjectId
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
 from flask_session import Session
-# from flask_login import LoginManager, UserMixin, login_user, login_required, current_user, logout_user
-# from flask_bcrypt import Bcrypt
+
 from flask_cors import CORS, cross_origin
 
 app.config['SESSION_TYPE'] = 'filesystem'  # Ajusta la configuración según tus necesidades
 Session(app)
-# CORS(app)
-# CORS(app, origins={"http:localhost:3000"})
-# CORS(app, resources={r'/login/*':{"origins":{"http://localhost:3000"}}})
+
 app.config['MONGO_URI'] = "mongodb://localhost:27017/pruebadb"
 mongo = PyMongo(app)
 dataSession = {}
@@ -34,22 +31,12 @@ def createRegister():
 
 
         insertd_id = id.inserted_id
-        return jsonify(str(insertd_id))
+        # return jsonify(str(insertd_id))
+        return jsonify({'inserted_id': str(insertd_id), 'message': 'register creado correctamente  correctamente'}), 200
     else: 
         return jsonify({'msg': 'correo ya registrado'})
 
-# @app.route('/register', methods=['GET'])
-# def getRegister():
-#     user = []
-#     for doc in db.find():
-#         user.append({
-#             '_id': str(ObjectId(doc['_id'])),
-#             'username': doc['username'],
-#             'email': doc['email'],
-#             'password': doc['password']
-#         })
-        
-#     return jsonify(user)
+
 @app.route('/register', methods=['GET'])
 def getRegister():
     user_list = []

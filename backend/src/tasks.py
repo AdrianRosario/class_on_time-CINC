@@ -38,11 +38,15 @@ def creatTasks():
             'date': request.json['date']})
 
         insertd_id = id.inserted_id
-        return jsonify(str(insertd_id))
+        # return jsonify(str(insertd_id))
+        return jsonify({'inserted_id': str(insertd_id), 'message': 'La tarea se ha agregado correctamente'}), 200
+       
+    
     else:
           return jsonify({'error': 'Acceso no autorizado'}), 401
 
 
+    
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     if 'user_id' in dataSession or 'google_user_id' in dataSession:
@@ -80,7 +84,6 @@ def get_tasks():
         return jsonify({'error': 'Acceso no autorizado'}), 401
 
 @app.route('/tasks/<id>', methods=['GET'])
-
 def getTask(id):
     tasks = db.find_one({'_id': ObjectId(id)})
 

@@ -1,224 +1,445 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap");
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  text-decoration: none;
-  list-style: none;
-  font-family: "Lobster", cursive;
+  font-family: "Montserrat Alternates", sans-serif;
 }
 
-.head-navbar {
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
-  background: #8fbf9f;
-  font-size: 20px;
-}
-.logo {
-  font-size: 20px;
- 
-}
-.log{
-  text-decoration: none;
-  color: #000;
-}
-.head-navbar .header-left {
-  display: flex;
-  align-items: center;
-}
-.head-navbar .header-left .logo {
-  width: 140px;
-}
-.head-navbar .header-left nav {
-  margin-left: 50px;
-}
-.head-navbar .header-left nav ul {
-  display: flex;
-}
-nav ul li a {
-  display: block;
-  color: #100f0f;
-  font-size: 20px;
-  padding: 5px 25px;
-  transition: 0.2s;
-}
-nav ul li a:hover,
-nav ul li a.active {
-  color: #100f0f;
-}
-nav .logout-signup {
-  display: none;
-}
-.head-navbar .header-logout {
-  display: flex;
-  align-items: center;
-}
-.head-navbar .logout-signup {
-  color: #100f0f;
-  font-weight: bold;
-}
-.head-navbar .logout-signup link {
-  display: inline-block;
-  color: #100f0f;
-  background: #0a0a0a;
-  padding: 5px 12px;
-  border-radius: 5px;
-}
 
-.logout-L {
-  font-size: .8em;
-  font-family: 'Oswald', sans-serif;
-	position: relative;
-  right: -50px;
-  bottom: 27px;
-  overflow: hidden;
-  letter-spacing: 3px;
-  opacity: 0;
-  transition: opacity .45s;
-  -webkit-transition: opacity .35s;
+
+.header-t .btn-menu
+ {
+  float: left;
+  line-height: 80px;
+  padding-top: 10px;
+  margin: 20px;
   
-} 
-
-
-.button-L {
-  text-decoration: none;
-	float: right;
-  margin: 15px;
-  color: #000;
-  width: 25px;
-  padding-top: 35px;
-  transition: width .35s;
-  -webkit-transition: width .35s;
-  margin-left: 10px;
+  
   
 }
-
-.button-L:hover {
-  width: 125px;
-}
-
-.button-L:hover .logout-L {
-  opacity: 0.9;
-}
-
-.button-L {
-  text-decoration: none;
-}
-
-.head-navbar .header-logout .hamburger {
-  margin-left: 20px;
+.header-t .btn-menu .cierre {
+  color: #090909;
+  font-size: 30px;
   cursor: pointer;
-  display: none;
-}
-.head-navbar .header-logout .hamburger div {
-  width: 30px;
-  height: 2px;
-  margin: 6px 0;
-  background: #100f0f;
-}
-
-
-
-.menu__links{
-  height: 100%;
-  transition: transform .5s;
-  display: flex;
-}
-
-.menu__item{
-  list-style: none;
-  position: relative;
-  height: 100%;
-  --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
-  --transform: rotate(-90deg);
-}
-
-.menu__item:hover{
-  --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-  --transform: rotate(0);
-}
-
-.menu__link{
-  color:#000;
-  text-decoration: none;
-  padding: 0 50px;
-  display: flex;
-  height: 100%;
-  align-items: center;
-}
-
-/* .menu__link:hover{
-  background-color: white; 
-} */
-
-
-.menu__arrow{
-  transform: var(--transform);
-  transition: transform .3s;
-  display: block;
-  margin-left: 5px;
-}
-
-.menu__nesting{
-  list-style: none;
-  transition:clip-path .3s;
-  clip-path: var(--clip);
-  position: absolute;
-  left: 0;
-  bottom: -30px; 
-
-  width: max-content;
-  transform: translateY(100%);
-  background-color: #DEDBA7;
- 
+  padding-bottom: 10px;
   
 }
-
-.menu__link--inside{
-  padding: 5px 40px 15px 20px;
+.head {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    /* background: transparent; */
+    
 }
-
-.menu__link--inside:hover{
-  background-color:#F18F01 ;
+.head .header-t {
+    display: flex;
+    align-items: center;
+    
 }
-
-@media only screen and (max-width: 1000px) {
-  .head-navbar {
-    padding: 0 20px;
-  }
-  .head-navbar .header-logout .hamburger {
+.head .header-t .logo-t {
+   /* padding-top: 40px; */
+   color: #020202;
+   font-size: 22px;
+}
+.head .header-t nav {
+    margin-left: 75px;
+}
+.head .header-t .nav-t ul {
+    display: flex;
+    list-style: none;
+}
+.nav-t ul li .link {
     display: block;
-  }
-  .head-navbar .header-left nav {
-    margin: 0;
+    color: #060606;
+    font-size: 18px;
+    padding: 20px 25px;
+    
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    
+}
+.nav-t ul li a:hover{
+  color: #060dde;
+}
+.nav-t .login-signup-t {
+    display: none;
+}
+.head .header-right-t {
+    display: flex;
+    align-items: center;
+}
+.head .login-signup-t {
+    color: #cfd9e0;
+    font-weight: bold;
+}
+/* header .login-signup a {
+    display: inline-block;
+    color: #f8f9fb;
+    background: teal;
+    
+    
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    
+    
+    text-decoration: none;
+    
+    text-align: right;
+    transition: all 0.6s ease;
+}
+
+.login-signup span {
+    width: 1.6em;
+    margin: -0.2em -1em 1em;
+    
     position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: fit-content;
-    background-color: #0b2239;
-    padding: 30px;
-    transition: 0.3s;
-    text-align: center;
-    z-index: -1;
+    display: flex;
+    transition: all 0.6s ease;
+    
+} */
+.head .login-signup-t button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 8px;
+  height: 42px;
+  width: 140px;
+  border: none;
+  background: transparent;
+  border-radius: 20px;
+  border: solid 1px #000;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.head .login-signup-t .lable button{
+    line-height: 20px;
+    font-size: 17px;
+    
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+.head .header-right-t .hamburger-t {
+    margin-left: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+.head .login-signup-t button:hover {
+    background: #060dde;
   }
-  .head-navbar .header-left nav.active {
-    top: 70px;
-  }
-  .head-navbar .header-left nav ul {
-    display: block;
-  }
+  
+
+.head .header-right-t .hamburger-t div {
+    width: 30px;
+    height: 2px;
+    margin: 6px 0;
+    background: #fff;
+}
+@media only screen and (max-width: 1000px) {
+    .head {
+        padding: 0 20px;
+    }
+    .head .header-right-t .hamburger-t {
+        display: block;
+    }
+    .head .header-t nav {
+        margin: 0;
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: fit-content;
+        background-color: #0b2239;
+        padding: 30px;
+        transition: 0.3s;
+        text-align: center;
+        z-index: -1;
+    }
+    /* header .header-left nav.active {
+        top: 70px;
+    } */
+    .head .header-t nav ul {
+        display: block;
+    }
 }
 @media only screen and (max-width: 500px) {
-  nav .logot-signup {
-    display: block;
-    margin-top: 20px;
-  }
-  .head-navbar .header-logout .logout-signup {
-    display: none;
-  }
+    .nav-t .login-signup-t {
+        display: block;
+        margin-top: 20px;
+    }
+    body {
+        background-position: left -290px bottom 20px;
+        /* background-position: center; */
+        background-size: 200%;
+        
+    }
+    .head .header-right-t .login-signup-t {
+        display: none;
+    }
+}
+/*Estilos para el encabezado*/
+/* .header {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.container {
+    margin: auto;
+	width: 90%;
+	max-width: 1200px;
+    
+}
+.container .btn-menu,
+.logo {
+  float: left;
+  line-height: 100px;
+  
+}
+.container .btn-menu label {
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+.logo h1 {
+  color: #fff;
+  font-weight: 400;
+  font-size: 22px;
+  margin-left: 10px;
+}
+.container .menu {
+  float: right;
+  line-height: 100px;
+}
+.container .menu a {
+  display: inline-block;
+  padding: 10px;
+  line-height: normal;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-size: 15px;
+  margin-right: 10px;
+}
+.container .menu a:hover {
+  border-bottom: 2px solid #c7c7c7;
+  padding-bottom: 5px;
+} */
+/*Fin de Estilos para el encabezado*/
+
+/*Menù lateral*/
+#btn-menu {
+  display: none;
+}
+.container-menu {
+  position: absolute;
+  background: transparent;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: all 500ms ease;
+  opacity: 0;
+  visibility: hidden;
+}
+#btn-menu:checked ~ .container-menu {
+  opacity: 1;
+  visibility: visible;
+}
+.cont-menu {
+  width: 100%;
+  max-width: 250px;
+  background: #fefafa;
+  height: 100vh;
+  position: relative;
+  transition: all 500ms ease;
+  transform: translateX(-100%);
+  z-index: 2;
+}
+#btn-menu:checked ~ .container-menu .cont-menu {
+  transform: translateX(0%);
+}
+.cont-menu .nav-l {
+  transform: translateY(15%);
+}
+.cont-menu .nav-l .link {
+  display: block;
+  text-decoration: none;
+  padding: 10px;
+  margin-top: 20px;
+  color: #080808;
+  border-left: 5px solid transparent;
+  transition: all 400ms ease;
+  font-size: 15px;
+}
+.cont-menu .nav-l .link:hover {
+  border-left: 5px solid #041cf5;
+  background: #ffffff;
+}
+.cont-menu .cierre {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  color: #000000;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.cont-menu .nav-l span {
+  color:#000;
+  /* height: 35px;
+  line-height: 35px; */
+  font-size: 20px;
+  top: 4px;
+  padding: 3px;
+  
+  position:relative;
+}
+
+.cont-menu .nav-l .label-sindebar {
+  color:#000000;
+  /* height: 35px;
+  line-height: 35px; */
+  font-size: 17px;
+  padding-top: 10px;
+  padding: 4px;
+  
+  
+}
+
+
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+
+.cont-menu li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  /* padding:175% 15px; */
+  margin-top: 150%;
+  color: #000000;
+
+}
+
+.cont-menu .open li.profile{
+  width: 250px;
+}
+
+.cont-menu .profile .profile_details{
+  display: flex;
+  align-items: center;
+  flex-wrap:  nowrap;
+}
+
+.cont-menu li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.cont-menu li.profile .name,
+.cont-menu li.profile .designation{
+  font-size: 15px;
+  font-weight: 400;
+  color:var(--color-white);
+  white-space: nowrap;
+}
+
+.cont-menu li.profile .designation{
+  font-size: 12px;
+}
+
+.cont-menu .profile #log_out{
+  position: fixed;
+  transform: translateY(-50%);
+  /* background-color: var(--color-second); */
+  width: 100%;
+  height: 60px;
+  line-height: 20px; 
+  border-radius: 5px;
+  cursor: pointer;
+  left: 75%;
+  /* transition: all 0.5s ease; */
+}
+
+/* .cont-menu .open .profile #log_out{
+ 
+  
+} */
+
+#log_out{
+  color: #000000;
+  font-size: 20px;
+  padding-top: 620%;
+  
+}
+
+.card-create-t {
+  position: absolute;
+  top: 11%; /* Ajusta según sea necesario */
+  left: 30%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 50px;
+
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001;
+}
+
+.card-create-t .mver-card {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+}
+.card-create-t .card-form {
+  width: 300px;
+  height: 200px;
+  background: #fff;
+  position: absolute;
+  top: 195%; /* Ajusta según sea necesario */
+  left: 60%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001;
+}
+
+.card-create-t .btn-cr{
+  margin-top: 20px;
+  width: 130px;
+  height: 30px;
+  background: #091e4230;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px ;
+}
+.card-create-t .btn-cr-cl{
+  width: 100px;
+  height: 30px;
+  background: #091e4230;
+  position: absolute;
+  top: 61%;
+  left: 60%;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px ;
 }

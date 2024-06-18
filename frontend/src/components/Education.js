@@ -3,13 +3,15 @@ import TareasPage from "../TareasPage";
 import { Link } from "react-router-dom";
 import icons from "../asset/img/bin.png";
 import edit from "../asset/img/edit.png";
-import '../style/styles_card.css'
+import "../style/styles_card.css";
+import { getTasks } from "./Education";
 
 const backend = process.env.REACT_APP_BACKEND;
 
 const Education = () => {
   const [tasks, setTasks] = useState([]);
   const [editedTask, setEditedTask] = useState(null);
+  const [message, setMessage] = useState("");
 
   const getTasks = async () => {
     const res = await fetch(`${backend}/tasks`);
@@ -18,18 +20,38 @@ const Education = () => {
       return;
     }
     const data = await res.json();
+    
     setTasks(data);
   };
+  const getEducationTasks = () => {
+    return tasks.filter((task) => task.guy === "Education");
+  };
+
+  // const getTasks = async () => {
+  //   const res = await fetch(`${backend}/tasks`);
+  //   if (res.status === 401) {
+  //     console.log("Unauthorized");
+  //     return;
+  //   }
+  //   const data = await res.json();
+  //   setTasks(data);
+  // };
 
   const deleteTask = async (id) => {
-    const userResponse = window.confirm(
-      "¿Estás seguro de que quieres eliminarlo?"
-    );
-    if (userResponse) {
-      await fetch(`${backend}/tasks/${id}`, {
-        method: "DELETE",
-      });
-      await getTasks();
+    try {
+      const userResponse = window.confirm(
+        "¿Estás seguro de que quieres eliminarlo?"
+      );
+      if (userResponse) {
+        const res = await fetch(`${backend}/tasks/${id}`, {
+          method: "DELETE",
+        });
+        await getTasks();
+        const data = await res.json();
+        setMessage(data.msg);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
 
@@ -43,16 +65,47 @@ const Education = () => {
   };
 
   const saveEditedTask = async () => {
-    await fetch(`${backend}/tasks/${editedTask._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedTask),
-    });
-    await getTasks();
-    setEditedTask(null);
+    try {
+      const response = await fetch(`${backend}/tasks/${editedTask._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedTask),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        await getTasks();
+        setEditedTask(null);
+
+        // Actualizar el estado de la notificación con el mensaje del backend
+        setMessage(data.msg);
+      } else {
+        // En caso de error, mostrar un mensaje de error genérico
+        setMessage("Error al editar la tarea");
+      }
+    } catch (error) {
+      console.error("Error al editar la tarea:", error);
+      // En caso de error, mostrar un mensaje de error genérico
+      setMessage("Error al editar la tarea");
+    }
   };
+
+  // const saveEditedTask = async () => {
+
+  //   await fetch(`${backend}/tasks/${editedTask._id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(editedTask),
+  //   });
+  //   await getTasks();
+  //   setEditedTask(null);
+
+  // };
 
   useEffect(() => {
     getTasks();
@@ -61,67 +114,78 @@ const Education = () => {
   return (
     <Fragment>
       <TareasPage />
-      <h1 className="titulo">Educacion</h1>
+      <h1 className="titulo">Educación</h1>
       <div className="tareas-T">
-        {tasks.map((task) => (
-          <div className="add-T" key={task._id}>
-            <header className="header-T">
+        {getEducationTasks().map((task) => (
+          <div className="card-card" key={task._id}>
+            <div className="date-time-container">
+              <time className="date-time" dateTime={task.date}>
+                <span>{new Date(task.date).getFullYear()}</span>
+                <span className="separator">-</span>
+                <span>
+                  {new Date(task.date).toLocaleDateString("default", {
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </span>
+              </time>
+            </div>
+            <div className="content">
               {editedTask && editedTask._id === task._id ? (
-                <input
-                
-                  type="text"
-                  name="nameTasks"
-                  value={editedTask.nameTasks}
-                  onChange={handleEditChange}
-                />
-              ) : (
-                <span className="span-T">{task.nameTasks}</span>
-              )}
-              {editedTask && editedTask._id === task._id ? (
-                <textarea
-                  name="description"
-                  value={editedTask.description}
-                  onChange={handleEditChange}
-                />
-              ) : (
-                <p className="description-T">{task.description}</p>
-              )}
-              {editedTask && editedTask._id === task._id ? (
-                <input
-                name="date"
-                type="date"
-                onChange={handleEditChange}
-                value={editedTask.date}
-              />
-              ):(
-                <div className="tiempo">
-                <span>{task.date}</span>
+                <div className="infos-card">
+                  
+                  <label>title *</label>
+                  <input
+                    type="text"
+                    name="nameTasks"
+                   className="iput"
+                    value={editedTask.nameTasks}
+                    onChange={handleEditChange}
+                  />
+                  <label>description *</label>
+                  <textarea
+                    name="description"
+                    className="textare"
+                    value={editedTask.description}
+                    onChange={handleEditChange}
+                  />
+                  
+                  <div className="icons">
+                    <button className="button" onClick={saveEditedTask}>Update</button>
+                    
+                  </div>
                 </div>
-              )}
-
-            </header>
-             
-            <div className="icons-T">
-              {editedTask && editedTask._id === task._id ? (
-                <button onClick={saveEditedTask}>Guardar</button>
+                
+                
               ) : (
                 <>
-                  <Link className="link" onClick={() => deleteTask(task._id)}>
-                    <img src={icons} alt="" />
-                  </Link>
-                  <Link className="link" onClick={() => editTask(task)}>
-                    <img src={edit} alt="" />
-                  </Link>
+                  <div className="infos">
+                    <a href="#">
+                      <span className="title-title">{task.nameTasks}</span>
+                    </a>
+                    <p className="description-description">{task.description}</p>
+                  </div>
+                  <div className="icons">
+                    <Link className="action">
+                      <span className="material-symbols-outlined">check_box</span>
+                    </Link>
+                    <Link className="action" onClick={() => editTask(task)}>
+                      <span className="material-symbols-outlined">edit_note</span>
+                    </Link>
+                    <Link className="action" onClick={() => deleteTask(task._id)}>
+                      <span className="material-symbols-outlined">delete</span>
+                    </Link>
+                  </div>
                 </>
               )}
             </div>
           </div>
         ))}
       </div>
+    
+      
     </Fragment>
   );
 };
 
 export default Education;
-
-

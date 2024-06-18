@@ -1,0 +1,100 @@
+<div className="overlay-pp">
+        <form className="form-pp" onSubmit={handleChangePassword}>
+          <div className="con-pp">
+            <header className="form-head-pp">
+              <h2>ResetPassword</h2>
+              <p>login here using your username and password</p>
+            </header>
+            {message && <p>{message}</p>}
+            <br />
+            <div className="field-pp">
+              {/* <label>id del usuario: {id}</label> */}
+             {/* <input type="text" value={id} onChange={(e) => setId(e.target.value)} />  */}
+              <label className="label-pp">ingrese su password actual :</label>
+              <input
+                className="form-input"
+                id="password"
+                type="Password"
+                placeholder="ingrese su password actual:"
+                required=""
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                value={currentPassword}
+              />
+              <label className="label-pp">Nueva Password</label>
+              <input
+                className="form-input"
+                id="newpassword"
+                type="Password"
+                placeholder="Nueva Password"
+                required=""
+                onChange={(e) => setNewPassword(e.target.value)}
+                value={newPassword}
+              />
+              <br />
+              <button className="log-pp"> Enviar </button>
+            </div>
+          </div>
+        </form>
+    
+      </div>
+
+
+      targeta card antigua 
+
+
+{/* <h1 className="titulo">Myjob</h1>
+      {message && <p>{message}</p>}
+      <div className="tareas-T">
+        {getMyjobTasks().map((task) => (
+          <div className="add-T" key={task._id}>
+            <header className="header-T">
+              {editedTask && editedTask._id === task._id ? (
+                <input
+                  type="text"
+                  name="nameTasks"
+                  value={editedTask.nameTasks}
+                  onChange={handleEditChange}
+                />
+              ) : (
+                <span className="span-T">{task.nameTasks}</span>
+              )}
+              {editedTask && editedTask._id === task._id ? (
+                <textarea
+                  name="description"
+                  value={editedTask.description}
+                  onChange={handleEditChange}
+                />
+              ) : (
+                <p className="description-T">{task.description}</p>
+              )}
+              {editedTask && editedTask._id === task._id ? (
+                <input
+                  name="date"
+                  type="date"
+                  onChange={handleEditChange}
+                  value={editedTask.date}
+                />
+              ) : (
+                <div className="tiempo">
+                  <span>{task.date}</span>
+                </div>
+              )}
+            </header>
+
+            <div className="icons-T">
+              {editedTask && editedTask._id === task._id ? (
+                <button onClick={saveEditedTask}>Guardar</button>
+              ) : (
+                <>
+                  <Link className="link" onClick={() => deleteTask(task._id)}>
+                    <img src={icons} alt="" />
+                  </Link>
+                  <Link className="link" onClick={() => editTask(task)}>
+                    <img src={edit} alt="" />
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
+      </div> */}  

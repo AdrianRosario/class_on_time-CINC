@@ -6,6 +6,7 @@ const backend = process.env.REACT_APP_BACKEND;
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const clearFields = () => {
     setEmail("");
@@ -13,7 +14,7 @@ const ResetPassword = () => {
 
   const handlesubmin = async (e) => {
     e.preventDefault();
-
+    try{
     const res = await fetch(`${backend}/resetpassword`, {
       method: "POST",
       headers: {
@@ -25,39 +26,43 @@ const ResetPassword = () => {
     });
     if (res.status === 200) {
       const data = await res.json();
-      console.log(data);
+      setMessage(data.msg)
       clearFields();
     } else {
-      console.error("Error al retablecer su password");
+      
+      setMessage("Error al retablecer su password")
     }
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
   };
 
   return (
     <Fragment>
       <Menu />
       <div className="reset">
-        <form onSubmit={handlesubmin} className="form-reset">
-          <div className="con-reset">
-            <header className="head-reset">
-              <h2>Reset Password</h2>
-            </header>
-            <div className="field-reset">
-                <label className="label-reset">Email *</label>
-              <input
-                className="form-input"
-                id="txt-gmail"
-                type="email"
-                placeholder="@Email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                autoFocus
-                required
-              />
-              <br />
-              <button className="log-reset"> Enviar </button>
-            </div>
-          </div>
-        </form>
+      
+      <form className="form-reset"  onSubmit={handlesubmin} >
+      {message && <p>{message}</p>} 
+      <span className="title-reset">Reset Passwor.</span>
+      <p className="description-reset">
+        Enviamos una nueva password a tu gmail para iniciar session, si quieres
+        actualizar tu nueva password en settin tienes una opcion para actualizar a tu gusto.
+      </p>
+      <div>
+        <input
+          placeholder="Enter your email"
+          type="email"
+          name="email"
+          id="email-address"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          autoFocus
+          required
+        />
+        <button type="submit">Recuperar</button>
+      </div>
+    </form>
       </div>
     </Fragment>
   );

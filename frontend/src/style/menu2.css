@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.header-t .btn-menu {
+  float: left;
+  line-height: 80px;
+  padding-top: 10px;
+  margin: 20px;
+}
+.header-t .btn-menu .cierre {
+  color: #090909;
+  font-size: 30px;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+.head {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  /* background: transparent; */
+}
+.head .header-t {
+  display: flex;
+  align-items: center;
+}
+.head .header-t .logo-t {
+  /* padding-top: 40px; */
+  color: #020202;
+  font-size: 18px;
+}
+.head .header-t nav {
+  margin-left: 75px;
+}
+.head .header-t .nav-t ul {
+  display: flex;
+  list-style: none;
+}
+.nav-t ul li .link {
+  display: block;
+  color: #fff;
+  font-size: 18px;
+  padding: 8px 15px;
+  background: #060ddece;
+  border-radius: 5px;
+
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+.nav-t ul li a:hover {
+  color: #0a0a0a;
+  background: #020af0;
+}
+.nav-t .login-signup-ap {
+  display: none;
+}
+.head .header-right-t {
+  display: flex;
+  align-items: center;
+}
+.head .login-signup-ap {
+  color: #cfd9e0;
+  font-weight: bold;
+}
+
+.head .login-signup-ap .btn-ap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 8px;
+  height: 48px;
+  width: 50px;
+  border: none;
+  background: transparent;
+  border-radius: 35px;
+  border: solid 1px #000;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.head .login-signup-ap .lable .btn-ap {
+  line-height: 20px;
+  font-size: 17px;
+
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+.head .header-right-t .hamburger-t {
+  margin-left: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.head .login-signup-ap .btn-ap:hover {
+  background: #060dde;
+}
+
+.head .header-right-t .hamburger-t div {
+  width: 30px;
+  height: 2px;
+  margin: 6px 0;
+  background: #fff;
+}
+@media only screen and (max-width: 1000px) {
+  .head {
+    padding: 0 20px;
+  }
+  .head .header-right-t .hamburger-t {
+    display: block;
+  }
+  .head .header-t nav {
+    margin: 0;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    background-color: #0b2239;
+    padding: 30px;
+    transition: 0.3s;
+    text-align: center;
+    z-index: -1;
+  }
+  /* header .header-left nav.active {
+        top: 70px;
+    } */
+  .head .header-t nav ul {
+    display: block;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .nav-t .login-signup-t {
+    display: block;
+    margin-top: 20px;
+  }
+  body {
+    background-position: left -290px bottom 20px;
+    /* background-position: center; */
+    background-size: 200%;
+  }
+  .head .header-right-t .login-signup-t {
+    display: none;
+  }
+}
+
+.card-logout {
+  position: absolute;
+  top: 11%; /* Ajusta según sea necesario */
+  left: 93.2%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 50px;
+
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001;
+}
+.card-logout .logout-user {
+  padding: 12px;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+}
+.logout-user .btn-lgot {
+  color: #000000;
+  width: 200px;
+  height: 30px;
+  border: none;
+  background: #091e420f;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.btn-lgot:hover {
+  background: #091e425b;
+}
+.btn-lgot span{
+    position: relative;
+    font-size: 15px;
+    padding: 2px;
+    top: 2px;
+}
+.card-create {
+  position: absolute;
+  top: 11%; /* Ajusta según sea necesario */
+  left: 20.2%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 50px;
+
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001;
+}
+.card-create .mver-card {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+}
+.mver-card .btn-mver {
+  margin-right: 5px;
+  color: #020;
+  margin-top: 10px;
+  width: 200px;
+  height: 30px;
+  border: none;
+  background-color: #091e4223;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-mver:hover {
+  background: #091e4241;
+}
+
+.card-create .card-form {
+  width: 300px;
+  height: 200px;
+  background: #fff;
+  position: absolute;
+  top: 195%; /* Ajusta según sea necesario */
+  left: 60%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001;
+}
+
+.card-form .lb-create{
+    color: #020;
+    display: flex;
+    justify-content: center;
+}
+.card-form .input-create{
+    width: 270px;
+    height: 40px;
+    background: #091e420f;
+    border: solid 1px #000;
+    border-radius: 5px;
+    margin-top: 25px;
+    margin-left: 5px;
+    font-size: 15px;
+}
+.card-create .btn-cr{
+    margin-top: 20px;
+    width: 130px;
+    height: 30px;
+    background: #091e4230;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px ;
+}
+.card-create .btn-cr-cl{
+    width: 100px;
+    height: 30px;
+    background: #091e4230;
+    position: absolute;
+    top: 61%;
+    left: 60%;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px ;
+}
+.btn-cr-cl:hover{
+    background: #091e425a;
+}
+.btn-cr:hover{
+    background: #091e425a;
+}

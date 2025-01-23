@@ -14,16 +14,48 @@
 }
 .header-t .btn-menu .cierre {
   color: #090909;
-  font-size: 30px;
+  font-size: 50px;
   cursor: pointer;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
+}
+.head .div-nameboard{
+  position: absolute;
+  top: 4%; 
+  left: 7%; 
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div-nameboard input{
+  border: solid 1.5px #1a1616;
+  width: 160px;
+  height: 40px;
+ border-radius: 0.5rem;
+ background: none;
+ padding: 0.5rem;
+ font-size: 1.3rem;
+ color: #0b0a0a;
+ transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+ background: #fff;
+}
+.div-nameboard .btn-title{
+  width: 80px;
+  background: #fff;
+  height: 40px;
+  margin-left:8px;
+  border-radius:8px ;
+  border: solid 1px #000;
+  margin-top: 10px;
+  
+
 }
 .head {
   height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 50px;
+  padding: 0 40px;
   /* background: transparent; */
 }
 .head .header-t {
@@ -33,10 +65,10 @@
 .head .header-t .logo-t {
   /* padding-top: 40px; */
   color: #020202;
-  font-size: 18px;
+  font-size: 20px;
 }
 .head .header-t nav {
-  margin-left: 75px;
+  margin-left: 110px;
 }
 .head .header-t .nav-t ul {
   display: flex;
@@ -150,30 +182,107 @@
     display: none;
   }
 }
-
-.card-logout {
+.carddrag-logout {
   position: absolute;
-  top: 11%; /* Ajusta según sea necesario */
-  left: 93.2%; /* Ajusta según sea necesario */
+  top: 22.5%; /* Ajusta según sea necesario */
+  left: 92.7%; /* Ajusta según sea necesario */
   transform: translate(-50%, -50%);
   width: 250px;
-  height: 50px;
+  height: 265px;
 
-  padding-left: 10px;
+  padding-left: 5px;
   border-radius: 10px;
   background-color: #fff;
   z-index: 1001;
 }
-.card-logout .logout-user {
-  padding: 12px;
+.carddrag-logout  .logout-user {
+  align-items: normal;
   display: flex;
-  /* flex-direction: row; */
-  justify-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.card-logout {
+  position: absolute;
+  top: 17%; /* Ajusta según sea necesario */
+  left: 92.5%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 145px;
+
+  padding-left: 5px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 1001;
+}
+.card-logout  .logout-user {
+  align-items: normal;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.logout-user .icons-u {
+  margin-top: 15px;
+}
+.logout-user .name-user {
+  color: #000;
+  position: absolute;
+  top: 11%; /* Ajusta según sea necesario */
+  left: 50.6%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+}
+.logout-user .email-user {
+  color: #000;
+  position: absolute;
+  top: 22%; /* Ajusta según sea necesario */
+  left: 60.6%; /* Ajusta según sea necesario */
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+
+.icons-u #icons {
+  position: relative;
+  font-size: 40px;
+  border: solid 1px #000;
+  border-radius: 35px;
+  padding: 4px;
+
+  bottom: 7px;
+  color: #000;
+}
+
+.ul-user {
+  padding-top: 10px;
+  color: #000;
+  width: 200px;
+  box-shadow: none;
+}
+.ul-user .user-ul {
+  position: relative;
+  border: none;
+  list-style: none;
+  text-decoration: none;
+  background: #091e420f;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 3px 15px;
+  padding-left: 25px;
+  padding-bottom: 10px;
+}
+.user-ul span {
+  font-size: 22px;
+  top: 6px;
+  padding: 1px;
+  right: 4px;
+  position: relative;
+}
+.user-ul:hover {
+  background: #091e425b;
 }
 .logout-user .btn-lgot {
   color: #000000;
-  width: 200px;
-  height: 30px;
   border: none;
   background: #091e420f;
   cursor: pointer;
@@ -183,11 +292,11 @@
 .btn-lgot:hover {
   background: #091e425b;
 }
-.btn-lgot span{
-    position: relative;
-    font-size: 15px;
-    padding: 2px;
-    top: 2px;
+.btn-lgot span {
+  position: relative;
+  font-size: 15px;
+  padding: 2px;
+  top: 2px;
 }
 .card-create {
   position: absolute;
@@ -238,46 +347,46 @@
   z-index: 1001;
 }
 
-.card-form .lb-create{
-    color: #020;
-    display: flex;
-    justify-content: center;
+.card-form .lb-create {
+  color: #020;
+  display: flex;
+  justify-content: center;
 }
-.card-form .input-create{
-    width: 270px;
-    height: 40px;
-    background: #091e420f;
-    border: solid 1px #000;
-    border-radius: 5px;
-    margin-top: 25px;
-    margin-left: 5px;
-    font-size: 15px;
+.card-form .input-create {
+  width: 270px;
+  height: 40px;
+  background: #091e420f;
+  border: solid 1px #000;
+  border-radius: 5px;
+  margin-top: 25px;
+  margin-left: 5px;
+  font-size: 15px;
 }
-.card-create .btn-cr{
-    margin-top: 20px;
-    width: 130px;
-    height: 30px;
-    background: #091e4230;
-    border: none;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 5px ;
+.card-create .btn-cr {
+  margin-top: 20px;
+  width: 130px;
+  height: 30px;
+  background: #091e4230;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px;
 }
-.card-create .btn-cr-cl{
-    width: 100px;
-    height: 30px;
-    background: #091e4230;
-    position: absolute;
-    top: 61%;
-    left: 60%;
-    border: none;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 5px ;
+.card-create .btn-cr-cl {
+  width: 100px;
+  height: 30px;
+  background: #091e4230;
+  position: absolute;
+  top: 61%;
+  left: 60%;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px;
 }
-.btn-cr-cl:hover{
-    background: #091e425a;
+.btn-cr-cl:hover {
+  background: #091e425a;
 }
-.btn-cr:hover{
-    background: #091e425a;
+.btn-cr:hover {
+  background: #091e425a;
 }

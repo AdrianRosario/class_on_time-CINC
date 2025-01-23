@@ -87,13 +87,24 @@
     
 } */
 
+
 .conten-space .container-space {
   margin-left: 60%;
-  margin-bottom: 100%;
+  margin-top: 10%;
+  
+  
 }
 .container-space .espacio-space .lb-cont {
   color: #000000;
   font-size: 22px;
+  
+}
+.espacio-space .lb-cont,
+.espacio-share .lb-cont {
+  position: sticky;
+  top: 0; /* Mantén el label en la parte superior */
+  z-index: 10; /* Coloca el label encima de otros elementos */
+  padding: 5px 0;
 }
 
 .conten-space .work-card {
@@ -102,7 +113,7 @@
   gap: 1em;
 }
 .work-card .card-bgr {
-  margin-top: 15px;
+  margin-top: 30px;
   padding: 10px;
   width: 200px;
   height: 80px;
@@ -111,7 +122,7 @@
   cursor: pointer;
 }
 .work-card .card-b .btn-space {
-  margin-top: 15px;
+  margin-top: 30px;
   padding: 10px;
   width: 200px;
   height: 80px;
@@ -119,6 +130,11 @@
   background: #091e420f;
   border: none;
   cursor: pointer;
+}
+.espacio-share{
+  color: #000;
+  margin-top:10%;
+  
 }
 
 /* }

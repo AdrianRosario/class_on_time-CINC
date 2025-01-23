@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Menu from "./Menu";
 import "../style/resetPassword.css"
+import ToastNotification, {showToast} from "./ToastNotification";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -24,26 +25,30 @@ const ResetPassword = () => {
         email,
       }),
     });
+    const data = await res.json();
     if (res.status === 200) {
-      const data = await res.json();
-      setMessage(data.msg)
+     
+      showToast(data.msg || "Password reset successful! Check your email.", "success");
+        
       clearFields();
     } else {
       
-      setMessage("Error al retablecer su password")
+      showToast(data.msg || "Error: Unable to reset password. Please try again.", "error");
     }
   } catch (error) {
     console.error('Error during login:', error);
+    showToast("An error occurred while processing your request.", "error");
   }
   };
 
   return (
     <Fragment>
+      <ToastNotification/>
       <Menu />
       <div className="reset">
       
       <form className="form-reset"  onSubmit={handlesubmin} >
-      {message && <p>{message}</p>} 
+     
       <span className="title-reset">Reset Passwor.</span>
       <p className="description-reset">
         Enviamos una nueva password a tu gmail para iniciar session, si quieres

@@ -1,13 +1,15 @@
 import React, { Fragment, useState } from "react";
 import TareasPage from "../TareasPage";
 import "../style/update.css";
+import Menu3 from "./Menu3";
+import ToastNotification,{showToast} from "./ToastNotification";
 
 const backend = process.env.REACT_APP_BACKEND;
 
 const PrivatePassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [message, setMessage] = useState("");
+  
 
   const clearFields = () => {
     setCurrentPassword("");
@@ -31,20 +33,29 @@ const PrivatePassword = () => {
 
       const data = await response.json();
 
-      setMessage(data.msg);
+      if (response.ok) {
+        // Mostrar notificación de éxito
+        showToast("Password updated successfully!","success");
+      } else {
+        // Mostrar notificación de error
+        showToast("Failed to update password.", "error");
+      }
+
+      
       clearFields();
     } catch (error) {
       console.error("Error updating password:", error);
+      showToast("error", "An error occurred while updating the password.");
     }
   };
 
   return (
     <Fragment>
-      <TareasPage />
+      <Menu3 />
+      <ToastNotification/>
       <div className="overlay-pp">
         <div class="body">
           <div class="container-update">
-          {message && <p>{message}</p>}
             <form className="form-update" onSubmit={handleChangePassword}>
               <div class="head">
                 <span>Update Password</span>

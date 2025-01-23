@@ -4,7 +4,7 @@ import json
 from flask_oauthlib.client import OAuth
 import requests
 from src import app
-from src.views import mongo, dataSession
+from src.views import mongo, session
 from flask_cors import CORS
 from bson import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -95,10 +95,10 @@ def authorized():
 
 
         # Save user information in the session
-        dataSession['google_user_id'] = decoded_token.get('sub')
-        dataSession['google_email'] = decoded_token.get('email')
-        dataSession['google_name'] = decoded_token.get('name')
-        dataSession['google_token'] = response['access_token']
+        session['google_user_id'] = decoded_token.get('sub')
+        session['google_email'] = decoded_token.get('email')
+        session['google_name'] = decoded_token.get('name')
+        session['google_token'] = response['access_token']
 
         print('User Name:', decoded_token.get('name'))
         print('User Email:', decoded_token.get('email'))
@@ -106,34 +106,35 @@ def authorized():
         
                 # Save user information in the session
         
-    redirect_url = '/tareas' if 'google_token' in dataSession else '/'
-    return redirect(f"http://localhost:3000{redirect_url}?access_token={dataSession.get('google_token')}")
+    redirect_url = '/espaciodetrabajo' if 'google_token' in session else '/'
+    return redirect(f"http://localhost:3000{redirect_url}?access_token={session.get('google_token')}")
 
 
 
 @app.route('/logout')
 def logout_google():
-    dataSession.pop('google_token', None)
+    session.pop('user_id', None)
+    session.pop('google_token', None)
     return jsonify({'msg': 'session closed'})
 
 
 @google.tokengetter
 def get_google_oauth_token():
-    return dataSession.get('google_token')
+    return session.get('google_token')
 
 
 
 @app.route('/usuario/info', methods=['GET'])
 def obtener_informacion_usuario():
     # Verificar si el usuario está autenticado
-    if 'google_token' not in dataSession:
+    if 'google_token' not in session:
         return jsonify({'error': 'Usuario no autenticado'}), 401
     
     # if 'google_user_id' not in session:
     #     return jsonify({'error': 'Usuario no autenticado'}), 401
 
     # Obtener la información del usuario desde la base de datos
-    usuario = db.find_one({'google_user_id': dataSession['google_user_id']})
+    usuario = db.find_one({'google_user_id': session['google_user_id']})
 
     if usuario:
         # Devolver la información del usuario en formato JSON

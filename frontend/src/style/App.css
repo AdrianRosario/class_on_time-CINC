@@ -9,3 +9,13 @@ body {
 background-color:#F5ECD7;
 color: #100f0f;
 }  
+.tiptap-editor {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 150px;
+  padding: 10px;
+}
+
+.tiptap-editor:focus {
+  outline: none;
+}

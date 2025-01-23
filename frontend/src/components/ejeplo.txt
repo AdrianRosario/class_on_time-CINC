@@ -1,0 +1,337 @@
+ // console.log("Card ID (taskId):", taskId);
+
+    // try {
+    //   const res = await fetch(`${backend}/description`, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       description,
+    //       card_id: taskId,
+    //     }),
+    //   });
+
+    //   if (res.status === 200) {
+    //     const data = await res.json();
+    //     console.log("Description data:", data);
+    //     clearFields();
+    //     setShowTxt(false);
+    //     setShowForm(false);
+    //     fetchDescription(taskId);
+    //   }
+    // } catch (error) {
+    //   console.error("Error durante la solicitud:", error);
+    // }
+  };
+
+  //   try {
+  //     if (!cardId) {
+  //       console.log("no se encontro el id");
+  //       return;
+  //     }
+
+  //     const res = await fetch(`${backend}/description`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         description,
+  //         cardId: cardId,
+  //       }),
+  //     });
+
+  //     if (res.status === 200) {
+  //       const data = await res.json();
+  //       console.log(data);
+  //       clearFields();
+  //       setShowTxt(false);
+  //       setShowForm(false);
+  //       fetchDescription();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error durante la solicitud:", error);
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   console.log("Column ID:", selectedColumn);
+
+  //   try {
+  //     const res = await fetch(`${backend}/card`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         title,
+  //         list: selectedColumn,
+  //         position: getList(selectedColumn).length,
+  //         // "column_id" : selectedColumn,
+  //       }),
+  //     });
+
+  //     if (res.status === 200) {
+  //       const data = await res.json();
+  //       console.log(data);
+  //       clearFields();
+  //       fetchTasks();
+  //       setShowForm((prev) => ({ ...prev, [selectedColumn]: false }));
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during submit:", error);
+  //   }
+  //   if (editedTask) {
+  // const res = await fetch(`${backend}/description/${id}`, {
+  //   method: "PUT",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     description,
+  //   }),
+  // });
+
+  // if (res.status === 200) {
+  //   const data = await res.json();
+  //   console.log(data);
+  //   setEditedTask(null);
+  //   // setId("");
+  //   setShowTxt(false);
+  //   fetchDescription();
+  // }
+
+  //   }else{
+  // try {
+  //   // Verificar si ya existe una descripción
+  //   const checkRes = await fetch(`${backend}/description`);
+  //   if (checkRes.status === 200) {
+  //     const existingData = await checkRes.json();
+  //     if (existingData.length > 0) {
+  //       console.log("La descripción ya existe, no se puede crear otra.");
+  //       alert("La descripción ya existe, no se puede crear otra.");
+  //       return;
+  //     }
+
+  //         // Proceder con la creación de la nueva descripción
+  //         const res = await fetch(`${backend}/description`, {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             description,
+  //             'cardId': cardId,
+
+  //           }),
+  //         });
+
+  //         if (res.status === 200) {
+  //           const data = await res.json();
+  //           const cardId = data.insert;
+  //           console.log(cardId);
+  //           clearFields();
+  //           setShowTxt(false);
+  //           setShowForm(false);
+  //           fetchDescription();
+  //         } else {
+  //           console.log("Error al crear la descripción:", res.statusText);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Error durante la solicitud:", error);
+  //     }
+
+  //   }
+
+  // };
+  // try {
+  //   const res = await fetch(`${backend}/description`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       description,
+  //     }),
+  //   });
+
+  //   if (res.status === 200) {
+  //     const data = await res.json();
+  //     console.log(data);
+  //     clearFields();
+  //     setShowTxt(false);
+  //     fetchDescription();
+  //   }
+  // } catch (error) {
+  //   console.error("Error during submit:", error);
+  // }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const res = await fetch(`${backend}/card`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         title,
+  //         list: selectedColumn,
+  //         position: getList(selectedColumn).length,
+  //       }),
+  //     });
+
+  //     if (res.status === 200) {
+  //       const data = await res.json();
+  //       console.log(data);
+  //       clearFields();
+  //       fetchTasks();
+  //       setShowForm((prev) => ({ ...prev, [selectedColumn]: false }));
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during submit:", error);
+  //   }
+  //   if (!editedTask) {
+  //     try {
+  //       const res = await fetch(`${backend}/description/${id}`, {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           description,
+  //         }),
+  //       });
+
+  //       if (res.status === 200) {
+  //         const data = await res.json();
+  //         console.log(data);
+  //         setEditedTask(false);
+  //         setId("");
+  //         setShowTxt(false);
+  //         fetchDescription();
+  //       }
+  //     } catch (error) {
+  //       console.error("Error during submit:", error);
+  //     }
+  //   } else {
+  //     try {
+  //       const res = await fetch(`${backend}/description`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           description,
+  //         }),
+  //       });
+
+  //       if (res.status === 200) {
+  //         const data = await res.json();
+  //         console.log(data);
+  //         clearFields();
+  //         setShowTxt(false);
+  //         fetchDescription();
+  //       }
+  //     } catch (error) {
+  //       console.error("Error during submit:", error);
+  //     }
+  //   }
+  // };
+
+  // const editTask = async (id) => {
+  //   const res = await fetch(`${backend}/description/${id}`);
+  //   const data = await res.json();
+
+  //   setEditedTask(true);
+  //   setId(id);
+  //   setDescription(data.description);
+  //   console.log("Datos a editar:", data);
+  //   setShowTxt(true);
+  // };
+  // const editTask = (id) => {
+  //   const descriptionToEdit = descriptions.find((desc) => desc._id === id);
+  //   setEditedTask(true);
+  //   setId(id);
+  //   setDescription(descriptionToEdit.description);
+  //   setShowTxt(true);
+  // };
+
+  {/* {showCard && (
+  <div className="card-cont">
+    <div className="cont-drag">
+      <div className="cont-tn">
+        <h2>
+          <span className="material-symbols-outlined">team_dashboard</span>
+          Título de la tarjeta
+        </h2>
+        <div className="cont-dct">
+          <h3>
+            <span className="material-symbols-outlined">subject</span>
+            Descripción
+          </h3>
+          <button className="btn-dct" onClick={() => editTask(description)}>Editar</button>
+          <div className="pt-dct">
+            {!showTxt && (
+              <button className="btn-dc" onClick={toggleTxt}>
+                {descriptions.map((description) => (
+                  <span className="span-dct" key={description._id}>
+                    {description.description || 'Descripción guardada en la tarjeta'}
+                  </span>
+                ))}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {showTxt && (
+          <div className="txr">
+            <form onSubmit={handleSubmit}>
+              <textarea
+                className="input-txr"
+                type="text"
+                placeholder="Introduzca un título para esta tarjeta"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+              />
+              <button className="btn-txr" type="submit">
+                Guardar
+              </button>
+            </form>
+            <button className="btn-tx" onClick={toggleTxt}>
+              Cancelar
+            </button>
+          </div>
+        )}
+
+        {showTxt2 && editedTask && (
+          <div className="txr">
+            <form onSubmit={saveEditedTask}>
+              <textarea
+                className="input-txr"
+                name="description"
+                type="text"
+                placeholder="Editar descripción"
+                value={editedTask.description}
+                onChange={handleEditChange}
+              />
+              <button className="btn-txr" type="submit">
+                Guardar
+              </button>
+            </form>
+            <button className="btn-tx" onClick={toggleTxt2}>
+              Cancelar
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+    <div className="closet-card" onClick={toggleCard}>
+      <span className="material-symbols-outlined">close</span>
+    </div>
+  </div>
+)} */}

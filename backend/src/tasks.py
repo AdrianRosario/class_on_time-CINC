@@ -6,7 +6,7 @@ from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity
 from src import app
 from flask_pymongo import PyMongo, ObjectId
 # from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
-from src.views import mongo, dataSession, session
+from src.views import mongo, session
 
 
 
@@ -20,13 +20,13 @@ Session(app)
 @app.route('/tasks', methods=[ 'POST'])
 
 def creatTasks():
-    if 'user_id' in dataSession or 'google_user_id' in dataSession:
+    if 'user_id' in session or 'google_user_id' in session:
         # Verificar si el usuario inició sesión con Google
-        if 'google_user_id' in dataSession:
-            current_user_id = dataSession['google_user_id']
+        if 'google_user_id' in session:
+            current_user_id = session['google_user_id']
         else:
             # Si no es un usuario de Google, utilizar el 'user_id' normal
-            current_user_id = dataSession['user_id']
+            current_user_id = session['user_id']
     # if 'user_id' in dataSession:
     #     current_user_id = dataSession['user_id']
         id = db.insert_one({  
@@ -49,13 +49,13 @@ def creatTasks():
     
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
-    if 'user_id' in dataSession or 'google_user_id' in dataSession:
+    if 'user_id' in session or 'google_user_id' in session:
         # Verificar si el usuario inició sesión con Google
-        if 'google_user_id' in dataSession:
-            current_user_id = dataSession['google_user_id']
+        if 'google_user_id' in session:
+            current_user_id = session['google_user_id']
         else:
             # Si no es un usuario de Google, utilizar el 'user_id' normal
-            current_user_id = dataSession['user_id']
+            current_user_id = session['user_id']
     # if 'user_id' in dataSession:
     #     current_user_id = dataSession['user_id']
         task = []

@@ -1,0 +1,172 @@
+ 
+   // const fetchDescription = async (cardId) => {
+  //   if (!cardId) {
+  //     console.error("No cardId provided");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const response = await fetch(`${backend}/description/${cardId}`);
+  //     const data = await response.json();
+  
+  //     if (data.length > 0) {
+  //       console.log('prueba', data[0].description); // Accede al primer elemento del array
+  //       setDescriptions(data[0]); // Si solo necesitas la primera descripción
+  //     } else {
+  //       console.log('No description found');
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching descriptions:", error);
+  //   }
+  // };
+  // const fetchDescription = async (cardId) => {
+  //   if (!cardId) {
+  //     console.error("No cardId provided");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch(`${backend}/description/${cardId}`);
+  //     const data = await response.json();
+  //     console.log('prueba', data)
+  //     setDescriptions(data); // Actualiza las descripciones del estado
+  //   } catch (error) {
+  //     console.error("Error fetching descriptions:", error);
+  //   }
+  // };
+ 
+ 
+ 
+ const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (selectedColumn) {
+        const res = await fetch(`${backend}/card`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            list: selectedColumn,
+            position: getList(selectedColumn).length,
+          }),
+        });
+
+        if (res.status === 200) {
+          const data = await res.json();
+          console.log(data);
+          clearFields();
+          fetchTasks();
+          setShowForm((prev) => ({ ...prev, [selectedColumn]: false }));
+        }
+      } else {
+        if (editedTask) {
+          const res = await fetch(`${backend}/description/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              description,
+            }),
+          });
+
+          if (res.status === 200) {
+            const data = await res.json();
+            console.log(data);
+            setEditedTask(null);
+            setId("");
+            setShowTxt(false);
+            fetchDescription();
+          }
+        } else if (!descriptions.length) {
+          const res = await fetch(`${backend}/description`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              description,
+            }),
+          });
+
+          if (res.status === 200) {
+            const data = await res.json();
+            console.log(data);
+            clearFields();
+            setShowTxt(false);
+            fetchDescription();
+          }
+        } else {
+          const existingDescription = descriptions[0];
+          setDescription(existingDescription.description);
+          setId(existingDescription._id);
+          setEditedTask(true);
+          setShowTxt(true);
+        }
+      }
+    } catch (error) {
+      console.error("Error during submit:", error);
+    }
+  };
+
+
+
+
+  {showCard && (
+        <div className="card-cont">
+          <div className="cont-drag">
+            <div className="cont-tn">
+              <h2>
+                <span className="material-symbols-outlined">
+                  team_dashboard
+                </span>
+                Título de la tarjeta
+              </h2>
+              <div className="cont-dct">
+                <h3>
+                  <span className="material-symbols-outlined">subject</span>
+                  Descripción
+                </h3>
+                {descriptions.map((description) => (
+                  <button
+                    className="btn-dct"
+                    onClick={() => editTask(description._id)}
+                    key={description._id}
+                  >
+                    Editar
+                  </button>
+                ))}
+                <div className="pt-dct">
+                  {!showTxt && (
+                    <button className="btn-dc" onClick={toggleTxt}>
+                      {description
+                        ? description
+                        : "Descripción guardada en la tarjeta"}
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {showTxt && (
+                <div className="txr">
+                  <form onSubmit={handleSubmit}>
+                    <textarea
+                      className="input-txr"
+                      type="text"
+                      placeholder="Introduzca un título para esta tarjeta"
+                      onChange={(e) => setDescription(e.target.value)}
+                      value={description}
+                    />
+                    <button className="btn-txr" type="submit">
+                      {editedTask ? "Update" : "Create"}
+                    </button>
+                  </form>
+                  <button className="btn-tx" onClick={toggleTxt}>
+                    Cancelar
+                  </button>
+                </div>
+              )}
+            </div>

@@ -6,7 +6,7 @@ from src import app
 from src.tasks import mongo
 import yagmail
 import random
-from src.views import session, dataSession
+from src.views import session
 
 
 
@@ -41,7 +41,7 @@ def resetpassword ():
 
 @app.route('/createpassword', methods=['PUT'])
 def create_password():
-    user_id = dataSession.get('user_id')
+    user_id = session.get('user_id')
 
     if not user_id:
         return jsonify({'error': 'Usuario no autenticado'}), 401

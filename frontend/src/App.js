@@ -21,6 +21,10 @@ import CardDrag from "./components/CardDrag";
 import Createcard from "./components/Createcard";
 import WorkSpace from "./components/WorkSpace";
 import Menu2 from "./components/Menu2";
+import board from "./components/WorkSpace";
+import Authenticate from "./components/Authenticate";
+import DecriptionEditor from "./components/DecriptionEditor";
+import Menu3 from "./components/Menu3";
 
 
 function App() {
@@ -30,6 +34,8 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     initialAuthenticatedStatus
   );
+  
+  
 
 
 
@@ -37,6 +43,7 @@ function App() {
   return (
     <Fragment>
       <Router>
+      {/* <Authenticate setIsAuthenticated={setIsAuthenticated} /> */}
         <div>
           <Routes>
             <Route path="/" element={<Inicio />} />
@@ -48,18 +55,18 @@ function App() {
             <Route path="/resetpassword" element={<ResetPassword/>}/>
             <Route path="/about"   element={<About setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/updata" element={<Updata/>}/>
-            <Route path="/carddrag" element={<CardDrag/>}/>
+            <Route path="/board/:id" element={<PrivateRoute isAuthenticated={isAuthenticated}><CardDrag setIsAuthenticated={setIsAuthenticated}/></PrivateRoute>}/>
             <Route path="/createcard" element={<Createcard/>}/>
-            <Route path="/espaciodetrabajo" element={<WorkSpace/>}/>
-            <Route path="/Menu2" element={<Menu2/>}/>
-           
-
+            <Route path="/espaciodetrabajo"  element={<PrivateRoute isAuthenticated={isAuthenticated}><WorkSpace  setIsAuthenticated={setIsAuthenticated}/></PrivateRoute>}/>
+            <Route path="/Menu2" element={<PrivateRoute isAuthenticated={isAuthenticated}><Menu2/></PrivateRoute>}/>
+            <Route path="/perfil-user"  element={<PrivateRoute isAuthenticated={isAuthenticated}><DecriptionEditor/></PrivateRoute>}/>
+            <Route path="/Menu3" element={<PrivateRoute isAuthenticated={isAuthenticated}><Menu3/></PrivateRoute>}/>
             <Route path="/hometaks" element={<PrivateRoute isAuthenticated={isAuthenticated}><Hometaks/></PrivateRoute>}/>
-            <Route path="/shareuser" element={<PrivateRoute isAuthenticated={isAuthenticated}><Shareuser/></PrivateRoute>}/>
+            {/* <Route path="/shareuser" element={<PrivateRoute isAuthenticated={isAuthenticated}><Shareuser/></PrivateRoute>}/> */}
 
             <Route
                exact
-              path="/tareas"
+              path="/board/:board_id"
               element={ 
                 <PrivateRoute isAuthenticated={isAuthenticated}>
                   <TareasPage setIsAuthenticated={setIsAuthenticated} />
@@ -75,6 +82,8 @@ function App() {
                 </PrivateRoute>
               }
             />
+           
+           
             <Route path="/education" element={<PrivateRoute isAuthenticated={isAuthenticated}><Education/></PrivateRoute>} />
             <Route path="/mythings" element={<PrivateRoute isAuthenticated={isAuthenticated}><Mythings/></PrivateRoute>} />
             <Route path="/myjob" element={<PrivateRoute isAuthenticated={isAuthenticated}><Myjob/></PrivateRoute>} />

@@ -1,15 +1,32 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../style/menu2.css";
 
+
+
 const Menu2 = () => {
+
+  const backend = process.env.REACT_APP_BACKEND;
+
+
   const [showCard, setShowCard] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [showSalida, setShowSalida] = useState(false);
+  const [message, setMessage] = useState("");
   const [nameboard, setNameboard] = useState('')
   const [board, setBoard] = useState([]);
+  const [nameuser, setNameuser] = useState({});
 
-  const backend = process.env.REACT_APP_BACKEND;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+ 
 
   const clearFields = () => {
     setNameboard("");
@@ -17,16 +34,19 @@ const Menu2 = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const user_id = sessionStorage.getItem("user_id");
+    const authentication_token = localStorage.getItem("authentication_token");
     try {
       const res = await fetch(`${backend}/board`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authentication_token}`,
 
         },
         body: JSON.stringify({
-          nameboard
+          nameboard,
+          user_id
         }),
       });
 
@@ -34,6 +54,8 @@ const Menu2 = () => {
         const data = await res.json();
         console.log(data)
         clearFields();
+        setShowCreate(false);
+        window.location.reload()
       }
       
     } catch (error) {
@@ -42,6 +64,42 @@ const Menu2 = () => {
 
     // showSalida(false);
   };
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(`${backend}/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        setMessage(data.msg);
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("jwt_token");
+        navigate("/");
+      } else {
+        setMessage("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const getUser = async () => {
+    const res = await fetch(`${backend}/user-profile`);
+    if (res.status === 401) {
+      console.log("Unauthorized");
+      return;
+    }
+    const data = await res.json();
+    setNameuser(data);
+  };
+  useEffect(() => {
+    getUser();
+    
+  },[]);
   
  
 
@@ -140,11 +198,35 @@ const Menu2 = () => {
 
             {showCard && (
               <div className="card-logout">
+                
                 <div className="logout-user">
-                  <button className="btn-lgot">
+                  <div className="icons-u">
+                  <span id="icons"  className="material-symbols-outlined">person</span>
+                  </div>
+                  <div className="name-user"><span> {nameuser.username} </span></div>
+                  <div className="email-user"> <span> {nameuser.email} </span>
+                  </div>
+                  {/* <h4 className="h4-m"><span id="icons"  className="material-symbols-outlined">person</span>Adrian Rosario <br/><span className="spm">goiryreyes08@gmail.com</span></h4> */}
+                  <ul className="ul-user">
+                    
+                    <li className="user-ul" onClick={handleLogout}>Logout  <span className="material-symbols-outlined">logout</span> </li>
+                    
+                  </ul>
+                  
+                </div>
+                {/* <div className="menu-user">
+                 
+                  
+                  <span className="name"><span id="icons"  className="material-symbols-outlined">person</span>prueba</span>
+                  <span className="email">jkfdjkaskjdnasjk</span>
+                  </div>
+                
+                  
+                <div className="logout-user">
+                  <button className="btn-lgot" onClick={handleLogout}>
                     Logout <span className="material-symbols-outlined">logout</span>
                   </button>
-                </div>
+                </div> */}
               </div>
             )}
           </div>

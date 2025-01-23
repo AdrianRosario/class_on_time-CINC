@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../style/login.css";
+import ToastNotification, { showToast } from "./ToastNotification";
 
 import Menu from "./Menu";
 
@@ -33,45 +34,75 @@ const Login = ({ setIsAuthenticated }) => {
         const data = await res.json();
         const token = data.access_token;
         localStorage.setItem("jwt_token", token);
+        console.log(data)
 
         setIsAuthenticated(true);
         localStorage.setItem("isAuthenticated", "true");
+        showToast("Inicio de sesión exitoso", "success");
         navigate("/espaciodetrabajo");
       } else {
         const errorData = await res.json();
-        setErrorMessage(errorData.msg); // Actualiza el estado con el mensaje de error
+        showToast(errorData.msg || "Credenciales incorrectas", "error");
+        // setErrorMessage(errorData.msg); // Actualiza el estado con el mensaje de error
       }
     } catch (error) {
       console.error("Error de inicio de sesión:", error);
     }
   };
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await fetch(`${backend}/get-google-auth-url`);
+  //     if (response.status === 200) {
+  //       const data = await response.json();
+  //       if (data.url) {
+  //         window.location.href = data.url;
+  //       } else {
+  //         throw new Error("URL de autenticación no proporcionada");
+  //       }
+  //     } else {
+  //       showToast(
+  //         "Error al obtener la URL de autenticación de Google",
+  //         "error"
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error durante el login con Google:", error);
+  //     showToast("Ocurrió un error durante la autenticación", "error");
+  //   }
+  // };
+  
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(`${backend}/get-google-auth-url`);
 
-    const handleLogin = async () => {
-      try {
-        const response = await fetch(`${backend}/get-google-auth-url`);
-  
-        if (response.status === 200) {
-          const data = await response.json();
-          window.location.href = data.url;
-  
-          setIsAuthenticated(true);
-          localStorage.setItem("isAuthenticated", "true");
-          navigate("/hometaks");
-        }
-      } catch (error) {
-        console.error("Error during login:", error);
+      if (response.status === 200) {
+        const data = await response.json();
+        window.location.href = data.url;
+
+        setIsAuthenticated(true);
+        localStorage.setItem("isAuthenticated", "true");
+        showToast("Redirigiendo para iniciar sesión con Google", "success");
+        navigate("/espaciodetrabajo");
+      } else {
+        showToast(
+          "Error al obtener la URL de autenticación de Google",
+          "error"
+        );
       }
-    };
-  
+    } catch (error) {
+      console.error("Error during login:", error);
+      showToast("Ocurrió un error en el servidor", "error");
+    }
+  };
 
   return (
     <>
       <Menu />
+      <ToastNotification />
       <div className="overlay">
         <div className="form-container">
-          
           <p className="title">Sign in to Class on Time</p>
-          <form  onSubmit={handleSubmit} className="form">
+          <form onSubmit={handleSubmit} className="form">
             <input
               type="email"
               id="txt-input"
@@ -106,7 +137,6 @@ const Login = ({ setIsAuthenticated }) => {
           <div className="google-login-button">
             <svg
               stroke="currentColor"
-              
               fill="currentColor"
               // stroke-width="0"
               strokeWidth={0}
@@ -148,6 +178,5 @@ const Login = ({ setIsAuthenticated }) => {
     </>
   );
 };
-
 
 export default Login;

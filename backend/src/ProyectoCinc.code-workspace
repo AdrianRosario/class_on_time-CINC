@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "ProyectoCinc",
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"CodeGPT.apiKey": "Ollama"
+	}
+}

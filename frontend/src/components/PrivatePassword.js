@@ -54,10 +54,10 @@ const PrivatePassword = () => {
       <Menu3 />
       <ToastNotification/>
       <div className="overlay-pp">
-        <div class="body">
-          <div class="container-update">
+        <div className="body">
+          <div className="container-update">
             <form className="form-update" onSubmit={handleChangePassword}>
-              <div class="head">
+              <div className="head">
                 <span>Update Password</span>
                 <p>
                   If you want to update your password you must first enter your
@@ -65,7 +65,7 @@ const PrivatePassword = () => {
                   button Update.
                 </p>
               </div>
-              <div class="inputs">
+              <div className="inputs">
                 <input
                   type="password"
                   placeholder="password actual"

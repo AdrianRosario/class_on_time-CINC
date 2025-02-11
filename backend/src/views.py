@@ -16,11 +16,6 @@ mongo = PyMongo(app)
 Session(app)
 # dataSession = {}
 session = {}
-try:
-    print(app.config['SESSION_FILE_DIR'])
-except KeyError:
-    print("SESSION_FILE_DIR no está configurado explícitamente. Flask utiliza la ubicación predeterminada.")
-
 
 
 jwt = JWTManager(app)

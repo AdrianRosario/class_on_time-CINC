@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link, useLocation, NavLink } from "react-router-dom";
 import "../style/navbar.css";
+import img from "../Icons/41da3NERJ4L.png";
 
 const Menu = () => {
   const location = useLocation();
@@ -14,7 +15,9 @@ const Menu = () => {
         <header>
           <div className="header-left">
             <div className="logo">
+            <img src={img} alt="Logo" className="logo-img" />
               <NavLink to="/" className="log">
+              
                 <h1 >
                   Class <br />
                   &nbsp; &nbsp; &nbsp; &nbsp; On
@@ -40,13 +43,13 @@ const Menu = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <Link to="/recursos" className="active" onClick={handleClick}>
+                  <Link to="#" className="active" onClick={handleClick}>
                     Recursos
                   </Link>
                 </li>
                 <li>
                   <NavLink
-                    to="/about"
+                    to="#"
                     
                     onClick={handleClick}
                   >

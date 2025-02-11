@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../style/menu2.css";
+import ToastNotification,{showToast} from "./ToastNotification";
+import { useCallback } from "react";
+import img from "../Icons/41da3NERJ4L.png";
 
 
 
@@ -12,9 +15,8 @@ const Menu2 = () => {
   const [showCard, setShowCard] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [showSalida, setShowSalida] = useState(false);
-  const [message, setMessage] = useState("");
   const [nameboard, setNameboard] = useState('')
-  const [board, setBoard] = useState([]);
+
   const [nameuser, setNameuser] = useState({});
 
   const navigate = useNavigate();
@@ -56,10 +58,14 @@ const Menu2 = () => {
         clearFields();
         setShowCreate(false);
         window.location.reload()
+        showToast("Tablero creado correctamente", "success");
+      }else {
+         showToast("Error al crear su Tablero", "error");
       }
       
     } catch (error) {
       console.error("Error during login:", error);
+       showToast("Error de red al crear su Tablero", "error");
     }
 
     // showSalida(false);
@@ -75,19 +81,18 @@ const Menu2 = () => {
       });
 
       if (res.status === 200) {
-        const data = await res.json();
-        setMessage(data.msg);
         localStorage.removeItem("isAuthenticated");
         localStorage.removeItem("jwt_token");
         navigate("/");
+        showToast("Logout successful", "success");
       } else {
-        setMessage("Logout failed");
+        showToast("Logout failed", "error");
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  const getUser = async () => {
+  const getUser = useCallback( async () => {
     const res = await fetch(`${backend}/user-profile`);
     if (res.status === 401) {
       console.log("Unauthorized");
@@ -95,11 +100,11 @@ const Menu2 = () => {
     }
     const data = await res.json();
     setNameuser(data);
-  };
+  },[backend]);
   useEffect(() => {
     getUser();
     
-  },[]);
+  },[getUser]);
   
  
 
@@ -114,6 +119,7 @@ const Menu2 = () => {
   };
   return (
     <>
+    <ToastNotification/>
       <header className="head">
         <div className="header-t">
           {/* <div className="btn-menu">
@@ -121,7 +127,8 @@ const Menu2 = () => {
               ☰
             </label>
           </div> */}
-          <div className="logo-t">
+          <div className="logo">
+            <img src={img} alt="Logo" className="logo-img" />
             <NavLink to='/'>
               <h3>
                 {" "}
@@ -240,59 +247,7 @@ const Menu2 = () => {
 
       <div className="capa"></div>
 
-      {/* <input type="checkbox" id="btn-menu" />
-      <div className="container-menu">
-        <div className="cont-menu">
-          <nav className="nav-l">
-            <NavLink to="#" className="link">
-              <span className="material-symbols-outlined"> person </span>
-              Miembros
-              <span className="material-symbols-outlined"> add </span>
-            </NavLink>
-            <NavLink to="#" className="link">
-              <span className="material-symbols-outlined"> settings </span>
-              Ajuste del Espacio de trabajo
-            </NavLink>
-            <br />
-
-            <label className="label-sindebar">
-              Vista del Espacio de trabajo
-            </label>
-            <NavLink to="#" className="link">
-              <span className="material-symbols-outlined"> data_table </span>
-              Tabla
-            </NavLink>
-            <NavLink to="#" className="link">
-              <span className="material-symbols-outlined">
-                {" "}
-                calendar_month{" "}
-              </span>
-              Calendario
-            </NavLink>
-
-            <label className="label-sindebar">
-              Sus tablero <span class="material-symbols-outlined">add</span>
-            </label>
-            <ul className="nav-list">
-              <li className="profile">
-                <div className="profile_details">
-                  <img src={imgprueba} alt="profile image" />
-                  <div className="profile_content">
-                    <div className="name">Anna Jhon</div>
-                    <div className="designation">Admin</div>
-                  </div>
-                </div>
-                
-                <span className="material-symbols-outlined" id="log_out" >logout</span>
-              </li>
-            </ul>
-          </nav>
-
-          <label for="btn-menu" className="cierre">
-            ✖️
-          </label>
-        </div> */}
-      {/* </div> */}
+     
     </>
   );
 };

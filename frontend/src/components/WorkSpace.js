@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style/workspace.css";
 import Menu2 from "./Menu2";
 import "../style/navbar_tareas.css";
+import "../style/styles_card.css";
 import Authenticate from "./Authenticate";
-import TareasPage from "../TareasPage";
 import ToastNotification, {showToast} from "./ToastNotification";
 
 
@@ -12,11 +12,11 @@ const backend = process.env.REACT_APP_BACKEND;
 
 const WorkSpace = ({ setIsAuthenticated}) => {
   const [showCreate, setShowCreate] = useState(false);
-  const [boards, setBoards] = useState([]);
+
   const [nameboard, setNameboard] = useState("");
   const [createdBoards, setCreatedBoards] = useState([]);
   const [sharedBoards, setSharedBoards] = useState([]);
-  const [boardshare, setBoardshare] = useState([]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

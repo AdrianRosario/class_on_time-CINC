@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 
-
+.logo {
+    display: flex;
+    align-items: center; /* Alinear logo y texto */
+    gap: 5px; /* Espacio entre el logo y el texto */
+  }
+  
+  .logo-img {
+    width: 75px; /* Ajusta el tamaño según necesites */
+    height: auto;
+  }
 .logo h1{
     color: #050505;
     font-size: 21px;
@@ -11,7 +20,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 30px;
     box-shadow: 0px 187px 75px #00000003, 0px 105px 63px #0000000d, 0px 47px 47px #00000017, 0px 12px 26px #0000001a, 0px 0px 0px #0000001a;
     background: #f3f0f0;
 }

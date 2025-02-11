@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import React from "react";
 import "../style/carddrag1.css";
@@ -9,8 +9,8 @@ import Authenticate from "./Authenticate";
 import ToastNotification, { showToast } from "./ToastNotification";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { es } from 'date-fns/locale';
-
+import { es } from "date-fns/locale";
+import "../style/add_tareas.css";
 
 const Createcard = ({ setIsAuthenticated }) => {
   const [showForm, setShowForm] = useState({});
@@ -31,10 +31,9 @@ const Createcard = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  const textareaRef = useRef(null);
+  const [user, setUser] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [filteredTasks, setFilteredTasks] = useState([]);
-
 
   // const [id, setId] = useState("");
   const { id } = useParams();
@@ -106,7 +105,6 @@ const Createcard = ({ setIsAuthenticated }) => {
       if (res.status === 200) {
         const data = await res.json();
         setTasks(data);
-        
       } else {
         console.log("Failed to fetch cards");
         showToast("Error al cargar las tareas", "error");
@@ -120,14 +118,12 @@ const Createcard = ({ setIsAuthenticated }) => {
   const filterTasksByCard = (cardId) => {
     return tasks.filter((task) => task._id === cardId);
   };
-  
-  const handleCardClick = (cardId) => {
-    console.log("Clicked Card ID:", cardId);
 
+  const handleCardClick = (cardId) => {
     if (taskId !== cardId) {
       setTaskId(cardId);
       const filteredTasks = filterTasksByCard(cardId);
-      setFilteredTasks(filteredTasks)
+      setFilteredTasks(filteredTasks);
       setDescriptions([]); // Limpia las descripciones anteriores
       setDescription(""); // Resetea la descripción
       fetchDescription(cardId);
@@ -139,8 +135,7 @@ const Createcard = ({ setIsAuthenticated }) => {
       setShowCard(true);
     }
   };
-  
-  
+
   const clearFields = () => {
     setTitle("");
     setDescription("");
@@ -309,7 +304,6 @@ const Createcard = ({ setIsAuthenticated }) => {
       showToast("Error al realizar la operación", "error");
     }
   };
-  
 
   const editTask = async () => {
     if (!taskId) return;
@@ -338,7 +332,6 @@ const Createcard = ({ setIsAuthenticated }) => {
   };
 
   const deleteTask = async () => {
-    console.log("delete", taskId);
     try {
       const userResponse = window.confirm(
         "¿Estás seguro de que quieres eliminarlo?"
@@ -453,12 +446,12 @@ const Createcard = ({ setIsAuthenticated }) => {
           title,
         }),
       });
-
-      const data = await response.json();
-      clearFields();
-      setShowTxt2(false);
-      fetchTasks();
-      showToast("Título actualizado exitosamente.", "success");
+      if (response.status === 200) {
+        clearFields();
+        setShowTxt2(false);
+        fetchTasks();
+        showToast("Título actualizado exitosamente.", "success");
+      }
     } catch (error) {
       console.error("Error updating password:", error);
       showToast("Error al actualizar el título.", "error");
@@ -518,7 +511,6 @@ const Createcard = ({ setIsAuthenticated }) => {
         const res = await fetch(`${backend}/board/${id}/user-role`);
         if (res.ok) {
           const data = await res.json();
-          console.log("Rol obtenido:", data.role); // Agrega este log para depurar
           setSelectedRole(data.role);
         } else {
           console.error("Error al obtener el rol del usuario");
@@ -528,23 +520,35 @@ const Createcard = ({ setIsAuthenticated }) => {
       }
     };
     fetchRole();
-  }, [id]);
+  }, [id, backend]);
 
   const handleInput = (e) => {
     const textarea = e.target;
     textarea.style.height = "auto"; // Reinicia la altura para recalcular
     textarea.style.height = `${textarea.scrollHeight}px`; // Ajusta la altura al contenido
   };
-  
+
+  useEffect(() => {
+    const getUser = async () => {
+      const res = await fetch(`${backend}/board/${id}/shared-users`);
+      if (res.status === 401) {
+        console.log("Unauthorized");
+        return;
+      }
+      const data = await res.json();
+      setUser(data);
+     
+    };
+
+    getUser();
+  }, [id, backend]);
+
   return (
     <>
       <ToastNotification />
       <Authenticate setIsAuthenticated={setIsAuthenticated} />
       <TareasPage fetchColumns={fetchColumns} selectedRole={selectedRole} />
-      <h1 className="h1-drag">
-        Arrastrar y Soltar &nbsp;
-        <img className="icon-react" src="src/assets/react.svg" alt="" />
-      </h1>
+
       {selectedRole === "administrador" && (
         <button className="prueba-btn" onClick={toggleCarduser}>
           <span className="material-symbols-outlined"> person_add </span>
@@ -598,7 +602,11 @@ const Createcard = ({ setIsAuthenticated }) => {
           <div className="cont-drag">
             <div className="cont-tn">
               <div className="jaja">
-                <h2 onClick={handleEditTitle}>
+                <h2
+                  onClick={
+                    selectedRole === "administrador" ? handleEditTitle : null
+                  }
+                >
                   {tasks.find((task) => task._id === taskId)?.title ||
                     "Título no disponible"}
                 </h2>
@@ -618,7 +626,7 @@ const Createcard = ({ setIsAuthenticated }) => {
                 </div>
               )}
               <div className="cont-dct">
-                <h3>
+                <h3 className="h3-dct">
                   <span className="material-symbols-outlined">subject</span>
                   Descripción
                 </h3>
@@ -662,6 +670,27 @@ const Createcard = ({ setIsAuthenticated }) => {
                       )}
                     </button>
                   )}
+                  <div className="user-ne">
+                    <label className="user-lb">Miembro del tablero : </label>
+
+                    {user.length > 0 ? (
+                      user.map((usr) => (
+                        <span key={usr.username} className="user-name">
+                          {usr.username}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="sp-mb">No hay miembros</span>
+                    )}
+                  </div>
+                  <div className="cont-fh">
+                    <label className="sp-fh">Fecha :</label>
+                    {filteredTasks.map((task) => (
+                      <span className="fh" key={task._id}>
+                        {task.created_at}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -704,13 +733,19 @@ const Createcard = ({ setIsAuthenticated }) => {
                         <label className="lb-usr">Miembros</label>
                         <span className="material-symbols-outlined">close</span>
                       </div>
-                      <input
-                        className="input-usr"
-                        type="text"
-                        placeholder="Buscar miembros"
-                      />
-                      <label className="lb-mb">Miembros del tablero</label>
-                      <span className="sp-mb">adrianrosario660@gmail.com</span>
+
+                      <label className="lb-mb">
+                        Miembros del tablero Email :
+                      </label>
+                      {user.length > 0 ? (
+                        user.map((usr) => (
+                          <span key={usr.email} className="sp-mb">
+                            {usr.email}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="sp-mb">No hay miembros</span>
+                      )}
                     </div>
                   </li>
                 )}
@@ -812,7 +847,7 @@ const Createcard = ({ setIsAuthenticated }) => {
       <div className="drag-and-drop">
         {columns.map((column) => (
           <div
-            className="column column--4"
+            className={`column column--${columns.indexOf(column) + 1}`}
             key={column._id}
             onDrop={(evt) => onDrop(evt, column._id)}
             onDragOver={draggingOver}

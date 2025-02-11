@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Authenticate = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const backend = process.env.REACT_APP_BACKEND;
-  const[timer, setTimer] = useState(900000);
+  const[, setTimer] = useState(900000);
 
   useEffect(() => {
     const handleActivity = () => {

@@ -109,6 +109,33 @@ def get_shared_boards():
         return jsonify({'error': 'Acceso no autorizado'}), 401
     
 
+@app.route('/board/<board_id>/shared-users', methods=['GET'])
+def get_shared_users(board_id):
+    try:
+        board = dbb.find_one({'_id': ObjectId(board_id)})
+        if not board:
+            return jsonify({'error': 'Tablero no encontrado'}), 404
+
+        shared_users = board.get('shared_users', [])
+
+        # Obtener detalles de cada usuario compartido
+        user_details = []
+        for shared_user in shared_users:
+            user_id = shared_user.get('user_id')
+            user = db.find_one({'_id': ObjectId(user_id)}, {'username': 1, 'email': 1})
+
+            if user:
+                user_details.append({
+                    'user_id': str(user['_id']),
+                    'username': user.get('username', 'Desconocido'),
+                    'email': user.get('email', 'No disponible'),
+                    'role': shared_user.get('role', 'No asignado')
+                })
+
+        return jsonify(user_details), 200
+
+    except InvalidId:
+        return jsonify({'error': 'ID del tablero inválido'}), 400
 
 
 

@@ -21,8 +21,9 @@
   background-size: cover;
   background-Position: 'center';
   background-repeat: no-repeat; */
-  background-size: 113%;
- min-height: 100vh;
+  background-size: 147%;
+  background-position: 60%;
+ min-height: 102vh;
   
   
   
@@ -31,12 +32,12 @@
   color: #090909;
   display: flex;
   margin: 80px;
-  margin-top: 10%;
+  margin-top: 1%;
   
   
 }
 .card {
-  width: 500px;
+  width: 700px;
   background-color: transparent;
   height: 600px;
   padding: 20px;
@@ -47,13 +48,13 @@ ul li {
 }
 
 li h1 {
-  font-size: 3.3em;
+  font-size: 3.1em;
 }
 li p {
-  font-size: 20px;
+  font-size: 18.5px;
 }
 li span {
-  font-size: 27px;
+  font-size: 25px;
 }
 
 .button-inicio {

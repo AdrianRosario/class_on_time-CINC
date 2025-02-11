@@ -3,7 +3,7 @@ import { useNavigate, NavLink, useParams } from "react-router-dom";
 import "./style/navbar_tareas.css";
 import imgprueba from "./asset/img/774418072505.jpg";
 import "./style/menu2.css";
-import WorkSpace from "./components/WorkSpace";
+
 import ToastNotification, {showToast} from "./components/ToastNotification";
 import ConfirmDialog from "./components/ConfirmDialog";
 const backend = process.env.REACT_APP_BACKEND;
@@ -12,7 +12,7 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
   const navigate = useNavigate();
   const { board_id } = useParams();
   const { id } = useParams();
-  console.log(id)
+ 
  
   const [click, setClick] = useState(false);
   const [message, setMessage] = useState("");
@@ -256,7 +256,7 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
 };
   return (
     <>
-      
+      <ToastNotification/>
       <header className="head">
         <div className="header-t">
           <div className="btn-menu">
@@ -369,14 +369,7 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
                   </div>
 
                   <ul className="ul-user">
-                    <li className="user-ul" onClick={handleLogout}>
-                      <NavLink>
-                        Logout{" "}
-                        <span className="material-symbols-outlined">
-                          logout
-                        </span>{" "}
-                      </NavLink>
-                    </li>
+                    
                     <li className="user-ul">
                       <NavLink to="/privatepassword"> ResetPassword</NavLink>{" "}
                     </li>
@@ -386,6 +379,14 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
                     <li className="user-ul" onClick={() => handleDeleteBoard(id)}>
                       <NavLink> Cerrar Tablero</NavLink>
                       
+                    </li>
+                    <li className="user-ul" onClick={handleLogout}>
+                      <NavLink>
+                        Logout{" "}
+                        <span className="material-symbols-outlined">
+                          logout
+                        </span>{" "}
+                      </NavLink>
                     </li>
                   </ul>
                 </div>

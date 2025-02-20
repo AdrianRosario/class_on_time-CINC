@@ -68,17 +68,7 @@ def get_tasks():
                 'guy': doc['guy'],
                 'date': doc['date'],
             })
-        # for doc in db.find({'user_id':ObjectId(current_user_id)}):
-        #     task.append({
-        #         '_id':str(ObjectId(doc['_id'])),
-        #         'user_id':str(ObjectId(doc['user_id'])),
-        #         'nameTasks': doc['nameTasks'],
-        #         'description': doc['description'],
-        #         'guy': doc['guy'],
-        #         'date': doc['date'],
-                
-
-        #     })
+        
         return jsonify(task)
     else:
         return jsonify({'error': 'Acceso no autorizado'}), 401

@@ -542,7 +542,7 @@ const Createcard = ({ setIsAuthenticated }) => {
 
     getUser();
   }, [id, backend]);
-
+  const colors = ["#494ce7", "#e53232", "#047c24", "#f39c12", "#8e44ad", "#16a085"];
   return (
     <>
       <ToastNotification />
@@ -671,7 +671,7 @@ const Createcard = ({ setIsAuthenticated }) => {
                     </button>
                   )}
                   <div className="user-ne">
-                    <label className="user-lb">Miembro del tablero : </label>
+                    <label className="user-lb">Miembros del tablero : </label>
 
                     {user.length > 0 ? (
                       user.map((usr) => (
@@ -845,10 +845,11 @@ const Createcard = ({ setIsAuthenticated }) => {
       )}
 
       <div className="drag-and-drop">
-        {columns.map((column) => (
+        {columns.map((column,index) => (
           <div
-            className={`column column--${columns.indexOf(column) + 1}`}
+            className="column"
             key={column._id}
+            style={{ borderColor: colors[index % colors.length] }}
             onDrop={(evt) => onDrop(evt, column._id)}
             onDragOver={draggingOver}
             // onClick={() => handleCardClick(column._id)}

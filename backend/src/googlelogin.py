@@ -64,10 +64,7 @@ def authorized():
         # Decode the JWT token to get user information
         decoded_token = jwt.decode(google_id_token, options={"verify_signature": False})
 
-        # Check if the user already exists in the database
-        # existing_user = db.find_one({'google_user_id': decoded_token['sub']})
-
-        # Save user information in the database
+       
 
         user_data = {
             'google_user_id': decoded_token['sub'],
@@ -130,10 +127,7 @@ def obtener_informacion_usuario():
     if 'google_token' not in session:
         return jsonify({'error': 'Usuario no autenticado'}), 401
     
-    # if 'google_user_id' not in session:
-    #     return jsonify({'error': 'Usuario no autenticado'}), 401
-
-    # Obtener la información del usuario desde la base de datos
+  
     usuario = db.find_one({'google_user_id': session['google_user_id']})
 
     if usuario:

@@ -21,7 +21,7 @@ def check_role(board_id, user_id, role):
 @app.route('/board/<board_id>/share', methods=['POST'])
 def share_board(board_id):
     email = request.json.get("email")
-    role = request.json.get("role")  # Recuperar el tipo de usuario (rol)
+    role = request.json.get("role")  
     
     if not email:
         return jsonify({"error": "Se requiere el correo electrónico del usuario"}), 400
@@ -29,15 +29,14 @@ def share_board(board_id):
     if not role:
         return jsonify({"error": "Se requiere el tipo de usuario"}), 400
 
-    # Buscar el usuario por correo electrónico
     user = db.find_one({"email": email})
     if not user:
         return jsonify({"error": "Usuario no encontrado"}), 404
 
-    user_id = str(user["_id"])  # Asegurarse de que el ID esté en formato cadena
+    user_id = str(user["_id"]) 
 
     try:
-        # Agregar al usuario con su rol al array shared_users
+        
         result = dbb.update_one(
             {"_id": ObjectId(board_id)},
             {"$addToSet": {
@@ -47,7 +46,7 @@ def share_board(board_id):
     except InvalidId:
         return jsonify({"error": "ID del tablero inválido"}), 400
 
-    # Verificar si el tablero fue encontrado y actualizado
+    
     if result.matched_count == 0:
         return jsonify({"error": "Tablero no encontrado"}), 404
 
@@ -65,11 +64,11 @@ def get_user_role(board_id):
         if not board:
             return jsonify({'error': 'Tablero no encontrado'}), 404
         
-        # Verificar si el usuario es el creador
+        
         if str(board.get('user_id')) == str(user_id):
             return jsonify({'role': 'administrador'}), 200
         
-        # Verificar si el usuario tiene un rol específico
+        
         for user in board.get('shared_users', []):
             if user['user_id'] == str(user_id):
                 return jsonify({'role': user['role']}), 200

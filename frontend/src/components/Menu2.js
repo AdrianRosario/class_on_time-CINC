@@ -171,7 +171,7 @@ const Menu2 = () => {
                             className="input-create"
                             type="text"
                             placeholder="Titulo del tablero"
-
+                            required
                             onChange={(e) => setNameboard(e.target.value)}
                             value={nameboard}
                           />

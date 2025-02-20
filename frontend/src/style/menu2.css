@@ -188,7 +188,8 @@
   left: 92.7%; /* Ajusta según sea necesario */
   transform: translate(-50%, -50%);
   width: 250px;
-  height: 265px;
+  height: fit-content;
+  padding: 10px;
 
   padding-left: 5px;
   border-radius: 10px;
@@ -255,6 +256,7 @@
   padding-top: 10px;
   color: #000;
   width: 200px;
+  
   box-shadow: none;
 }
 .ul-user .user-ul {

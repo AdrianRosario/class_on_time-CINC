@@ -187,6 +187,7 @@ const WorkSpace = ({ setIsAuthenticated}) => {
                         placeholder="Titulo del tablero"
                         onChange={(e) => setNameboard(e.target.value)}
                         value={nameboard}
+                        required
                       />
                       <button type="submit" className="btn-cr">
                         Crear

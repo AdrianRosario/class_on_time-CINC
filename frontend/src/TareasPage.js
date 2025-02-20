@@ -256,7 +256,7 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
 };
   return (
     <>
-      <ToastNotification/>
+      <ToastNotification />
       <header className="head">
         <div className="header-t">
           <div className="btn-menu">
@@ -266,7 +266,11 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
           </div>
 
           <div className="logo-t">
-            <h3 onClick={selectedRole === "administrador" ? handleEditboard : null}>
+            <h3
+              onClick={
+                selectedRole === "administrador" ? handleEditboard : null
+              }
+            >
               {getBoardTitle(id)}
             </h3>
             {/* <h3 onClick={role === "administrador" ? handleEditboard : null}>
@@ -308,7 +312,6 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
                     Crear
                   </NavLink>
                 </li>
-                
               )}
 
               {showCreate && (
@@ -369,17 +372,25 @@ const TareasPage = ({ setIsAuthenticated, fetchColumns, selectedRole, boarshare 
                   </div>
 
                   <ul className="ul-user">
-                    
                     <li className="user-ul">
                       <NavLink to="/privatepassword"> ResetPassword</NavLink>{" "}
                     </li>
                     <li className="user-ul">
                       <NavLink to="/perfil-user"> Perfil Usuario</NavLink>{" "}
                     </li>
-                    <li className="user-ul" onClick={() => handleDeleteBoard(id)}>
+                    {selectedRole === "administrador" && (
+                      <li
+                        className="user-ul"
+                        onClick={() => handleDeleteBoard(id)}
+                      >
+                        <NavLink to="#">Cerrar Tablero</NavLink>
+                      </li>
+                    )}
+
+                    {/* <li className="user-ul" onClick={() => handleDeleteBoard(id)}>
                       <NavLink> Cerrar Tablero</NavLink>
                       
-                    </li>
+                    </li> */}
                     <li className="user-ul" onClick={handleLogout}>
                       <NavLink>
                         Logout{" "}

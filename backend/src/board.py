@@ -86,32 +86,7 @@ def get_boards():
 
 
 
-# @app.route('/board', methods=['GET'])
-# def get_board():
-#     if 'user_id' in session or 'google_user_id' in session:
-#         # Verificar si el usuario inició sesión con Google
-#         if 'google_user_id' in session:
-#             current_user_id = session['google_user_id']
-#         else:
-#             # Si no es un usuario de Google, utilizar el 'user_id' normal
-#             current_user_id = session['user_id']
-#     # if 'user_id' in dataSession:
-#     #     current_user_id = dataSession['user_id']
-#         user_id_object = ObjectId(current_user_id)
-         
-#         board = []
-#         for doc in dbb.find({'user_id': current_user_id}):
-#             board.append({
-#                 '_id': str(ObjectId(doc['_id'])),
-#                 'user_id': doc['user_id'],
-#                 'nameboard': doc['nameboard']
-                
-#             })
-#         print(f"ID del usuario actual: {current_user_id}")
-        
-#         return jsonify(board)
-#     else:
-#         return jsonify({'error': 'Acceso no autorizado'}), 401
+
     
 @app.route('/board/<id>', methods=['PUT'])
 def update_board(id):
@@ -164,18 +139,7 @@ def delete_board(id):
         return jsonify({'error': 'ID de tablero inválido'}), 400
 
 
-# @app.route('/board/<id>', methods=['DELETE'])
-# def delete_board(id):
-#     user_id = str(session.get("user_id") or session.get("google_user_id"))
-    
-#     if not check_role(id, user_id, "administrador"):
-#         return jsonify({"error": "Permiso denegado"}), 403
-    
-#     result = dbb.delete_one({'_id': ObjectId(id)})
-#     if result.deleted_count > 0:
-#         return jsonify({'message': 'Tablero eliminado correctamente'})
-#     else:
-#         return jsonify({'message': 'Tablero no encontrado'}), 404
+
 
 
 @app.route('/column', methods=['POST'])
@@ -285,55 +249,6 @@ def get_all_colun():
             'created_at': created_at  # Fecha en formato español legible
         })
     return jsonify(card), 200
-# @app.route('/card', methods=['GET'])
-# def get_all_colun():
-#     card = []
-#     for doc in dbcd.find().sort('position', 1):
-#         card.append({
-#             '_id': str(ObjectId(doc['_id'])),
-#             'title': doc['title'],
-#             'list': doc['list'],
-#             'position': doc.get('position', 0)
-#         })
-#     return jsonify(card), 200
-# @app.route('/card/', methods=['POST'])
-# def create_card():
-#     user_id = session.get("user_id") or session.get("google_user_id")
-#     board_id = request.json.get('board_id')
-
-#     if not board_id:
-#         return jsonify({'message': 'ID del tablero es requerido'}), 400
-
-#     if not check_role(board_id, user_id, "administrador") and not check_role(board_id, user_id, "miembro"):
-#         return jsonify({"error": "Permiso denegado"}), 403
-
-#     list_number = request.json['list']
-#     position = request.json.get('position', 0)
-
-#     id = dbcd.insert_one({
-#         'title': request.json['title'],
-#         'list': list_number,
-#         'position': position,
-#         'board_id': ObjectId(board_id)
-#     })
-#     inserted_id = id.inserted_id
-#     return jsonify({'inserted': str(inserted_id), 'message': 'agregado correctamente'}), 200
-
-
-
-
-
-# @app.route('/card', methods=['GET'])
-# def get_all_colun():
-#     card = []
-#     for doc in dbcd.find().sort('position', 1):
-#         card.append({
-#             '_id': str(ObjectId(doc['_id'])),
-#             'title': doc['title'],
-#             'list': doc['list'],
-#             'position': doc.get('position', 0)
-#         })
-#     return jsonify(card), 200
 
 
 @app.route('/card/<card_id>', methods=['PUT'])
@@ -370,67 +285,7 @@ def update_card(card_id):
     )
     return jsonify({'message': 'Tarjeta actualizada correctamente'}), 200
 
-# @app.route('/card/<id>', methods=['PUT'])
-# def update_card(id):
 
-#     user_id = session.get("user_id") or session.get("google_user_id")
-#     if not check_role(id, user_id, "administrador") and not check_role(id, user_id, "miembro"):
-#         return jsonify({"error": "Permiso denegado"}), 403
-
-#     card_data = request.json
-#     list_id = card_data.get('list')  # Nueva columna destino
-#     position = card_data.get('position', 0)  # Nueva posición en la columna destino
-
-#     # Verificar si la tarjeta existe
-#     card = dbcd.find_one({'_id': ObjectId(id)})
-#     if not card:
-#         return jsonify({'message': 'Tarjeta no encontrada'}), 404
-
-#     # Mantener valores existentes si no se proporcionan
-#     if list_id is None:
-#         list_id = card.get('list')
-
-#     update_fields = {
-#         'title': card_data.get('title', card['title']),
-#         'list': list_id,
-#         'position': position,
-#     }
-
-#     # Actualizar la tarjeta
-#     dbcd.update_one(
-#         {'_id': ObjectId(id)},
-#         {'$set': {k: v for k, v in update_fields.items() if v is not None}}
-#     )
-#     return jsonify({'message': 'Tarjeta actualizada correctamente'}), 200
-
-# @app.route('/description', methods=['POST'])
-# def description():
-#     user_id = session.get("user_id") or session.get("google_user_id")
-
-#     card_id = request.json.get('card_id')
-
-#     if not card_id:
-#         return jsonify({'message': 'ID del tablero es requerido'}), 400
-    
-#     card = dbcd.find_one({'_id': ObjectId(card_id)})
-
-#     if not card:
-#         return jsonify({'message': 'Tablero no encontardo '}), 400
-    
-#     existing_description = dbdc.find_one({'card_id': ObjectId(card_id)})
-#     if existing_description:
-#         return jsonify({'message': 'Esta tarjeta ya tiene una descripción. Actualízala en su lugar.'}), 400
-    
-#     if not check_role(card_id, user_id, "administrador") and not check_role(card_id, user_id, "miembro"):
-#         return jsonify({"error": "Permiso denegado"}), 403
-
-#     id = dbdc.insert_one({
-#         'description':request.json['description'],
-#         'card_id': ObjectId(card_id)
-        
-#     }) 
-#     insertd_id = id.inserted_id
-#     return jsonify({'insertad': str(insertd_id), 'message': 'agregado correctamente'}), 200
 @app.route('/description', methods=['POST'])
 def description():
     user_id = session.get("user_id") or session.get("google_user_id")
@@ -503,19 +358,7 @@ def update_description(card_id):
     )
     return jsonify({'msg': 'Descripción actualizada correctamente'}), 200
 
-
-# @app.route('/description/<card_id>', methods=['PUT'])
-# def update_description (card_id):
-
-#     user_id = session.get("user_id") or session.get("google_user_id")
-#     if not check_role(card_id, user_id, "administrador") and not check_role(card_id, user_id, "miembro"):
-#         return jsonify({"error": "Permiso denegado"}), 403
-
-#     dbdc.update_one({'card_id': ObjectId(card_id)},{"$set": {
-
-#         'description': request.json['description']
-#     }})
-    return jsonify({'msg': 'description  update'})
+   
 
 
 @app.route('/description/<id>', methods=['DELETE'])
@@ -543,7 +386,7 @@ def delete_card(card_id):
         if not check_role(board_id, user_id, "administrador") and not check_role(board_id, user_id, "administrador"):
             return jsonify({"error": "Permiso denegado"}), 403
 
-        # Elimina las descripciones asociadas a la tarjeta
+        
         dbdc.delete_many({'card_id': ObjectId(card_id)})
 
         # Elimina la tarjeta

@@ -22,18 +22,7 @@ jwt = JWTManager(app)
 
 db = mongo.db.userb
 
-# @app.before_request
-# def check_inactivity():
-#     # Si el usuario está autenticado, verificar tiempo de inactividad
-#     if 'user_id' in session:
-#         last_activity = session.get('last_activity')
-#         # Si el usuario ha estado inactivo más de 1 minuto, cerramos sesión
-#         if datetime.utcnow() - last_activity > timedelta(minutes=15):
-#             session.clear()
-#             return jsonify({'error': 'Sesión cerrada por inactividad'}), 401
-#         else:
-#             # Actualizar la última actividad
-#             session['last_activity'] = datetime.utcnow()
+
 @app.before_request
 def check_inactivity():
     if 'user_id' in session:
@@ -110,13 +99,6 @@ def loginL():
     else:
         return jsonify({'error': 'Credenciales incorrectas'}), 401
 
-    # if user and check_password_hash(user['password'], request.json['password']):
-           
-    #     access_token = create_access_token(identity=str(user['_id']))
-
-    #     return jsonify(access_token=access_token), 200
-    # else:
-    #     return jsonify({'error': 'Credenciales incorrectas'}), 401
 @app.route('/user-profile', methods=['GET'])
 def user_profile():
     if 'user_id' in session or 'google_user_id' in session:
@@ -161,25 +143,6 @@ def update_profile(id):
         return jsonify({"error": "No se realizaron cambios"}), 400
 
     return jsonify({"message": "Perfil actualizado correctamente"}), 200   
-# @app.route('/user-profile/<id>', methods=['PUT'])
-# def update_profile(id):
-#     user_id = str(session.get("user_id") or session.get("google_user_id"))
-
-#     if not check_role(id, user_id, "administrador"):
-#         return jsonify({"error": "Permiso denegado tiene que ser admin "}), 403
-    
-#     titlename = request.json
-#     titleemail = request.json
-
-
-#     db.update_one(
-#         {'_id': ObjectId(id)},
-#         {'set':{
-#             'username': titlename.get('username'),
-#             'email': titleemail.get('email')
-#         }}
-#     )
-#     return jsonify({'message': 'actualizado correctamente'}), 200
 
 
 @app.route('/logout', methods=['POST'])

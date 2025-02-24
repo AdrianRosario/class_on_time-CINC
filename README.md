@@ -19,14 +19,16 @@ Asegúrate de tener instalado lo siguiente antes de comenzar:
 
 🔹 MongoDB --- version v6.0.9
 
-## Installation paso 1
+## Installation 
+
+### Paso 1
 
 clona el repositorio del proyecto
 
 ```bash
   git clone https://github.com/AdrianRosario/class_on_time-CINC.git
 ```
-## Paso 2 
+### Paso 2 
 ir al directorio de la carpeta del frontend usando:
 
 
@@ -34,13 +36,13 @@ ir al directorio de la carpeta del frontend usando:
 cd frontend
 
 ```
-## Paso 3 
+### Paso 3 
 Instala la dependencias del Frontend
 
 ```bash
 npm install 
 ```
-## Paso 4
+### Paso 4
 luego de a ver instalado sus dependencia en el Frontend encienda su 
 servidor usando:
 
@@ -48,7 +50,7 @@ servidor usando:
 npm start
 ```
 
-## Paso 4 
+### Paso 4 
 
 ir al directorio de la carpeta del backend usando:
 
@@ -56,7 +58,7 @@ ir al directorio de la carpeta del backend usando:
 cd backend
 
 ```
-## Paso 5 
+### Paso 5 
 
 Encianda su env o entorno virtual usando:
 
@@ -64,7 +66,7 @@ Encianda su env o entorno virtual usando:
 env/Scripts/activate
 
 ```
-## Paso 6 
+### Paso 6 
 
 Instala las dependencias del backend:
 
@@ -72,7 +74,7 @@ Instala las dependencias del backend:
 pip install -r requirements.txt
 
 ```
-## Paso 7
+### Paso 7
 
 Luego de ver instalado sus dependencias encienda su servidor para
 comenzar a correr su backend usando:

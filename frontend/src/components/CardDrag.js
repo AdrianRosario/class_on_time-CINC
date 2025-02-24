@@ -245,9 +245,10 @@ const Createcard = ({ setIsAuthenticated }) => {
         // **Agregar descripción si no existe**
         console.log("Adding description to existing card ID:", taskId);
 
-        const checkRes = await fetch(
-          `${backend}/description?card_id=${taskId}`
-        );
+        // const checkRes = await fetch(
+        //   `${backend}/description?card_id=${taskId}`
+        // );
+        const checkRes = await fetch(`${backend}/description/${taskId}`);
         if (checkRes.status === 200) {
           const existingData = await checkRes.json();
           if (existingData.length > 0) {

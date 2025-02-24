@@ -286,7 +286,7 @@ def update_card(card_id):
     return jsonify({'message': 'Tarjeta actualizada correctamente'}), 200
 
 
-@app.route('/description', methods=['POST'])
+@app.route('/description', methods=['GET','POST'])
 def description():
     user_id = session.get("user_id") or session.get("google_user_id")
     card_id = request.json.get('card_id')
